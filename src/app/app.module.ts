@@ -6,11 +6,14 @@ import { AppComponent } from './app.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './shared/auth-guard.service';
 import { AuthStateService } from './shared/auth-state.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { NotFoundComponent } from './not-found.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -23,6 +26,9 @@ import { HttpClientModule } from '@angular/common/http';
     AuthService,
     AuthGuard,
     AuthStateService,
+    {
+      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

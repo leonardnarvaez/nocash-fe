@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router, ActivatedRoute} from '@angular/router';
+import { User } from 'src/app/models/user';
 
 
 @Component({
@@ -9,10 +11,15 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit{
+  private returnUrl: string;
   loginForm!: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService){}
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private route: ActivatedRoute){
+    this.returnUrl =
+    this.route.snapshot.queryParams["returnUrl"] || "/dashboard";
+  } 
+  
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group(
@@ -22,6 +29,9 @@ export class LoginComponent implements OnInit{
 
       },
     )
+    if(this.authService.isAuthenticated()){
+      this.router.navigateByUrl(this.returnUrl);
+    }
   }
 
   get f() {
@@ -34,7 +44,11 @@ export class LoginComponent implements OnInit{
       return;
     }
 
-    this.authService.login(this.loginForm.value.mobileNumber, this.loginForm.value.pin);
+    this.authService.login(this.loginForm.value.mobileNumber, this.loginForm.value.pin)
+    .subscribe((user: User) => {
+      this.router.navigateByUrl(this.returnUrl);
+      console.log(user);
+    });
     
   }
 }

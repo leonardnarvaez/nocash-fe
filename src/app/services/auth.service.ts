@@ -11,6 +11,7 @@ import {
 
 import { AuthStateService } from '../shared/auth-state.service';
 import { User } from '../models/user';
+import { Observable, tap, pipe } from "rxjs";
 
 @Injectable()
 export class AuthService {
@@ -25,17 +26,15 @@ export class AuthService {
     return this.stateService.hasCurrentUser();
   }
 
-  login(mobileNumber: string, pin: string) {
+  login(mobileNumber: string, pin: string): Observable<User> {
     console.log('~~ login ', this.API_HOST);
     this.stateService.removeCurrentUser();
-    const res = this.httpClient.post<User>(`${this.API_HOST}/authentication/authenticate`, {
+    return this.httpClient.post<User>(`${this.API_HOST}/authentication/authenticate`, {
       mobileNumber,
       pin
-    });
-    res.subscribe((user: User) => {
-      console.log(user);
-      this.stateService.setCurrentUser(user);
-    })
+    }).pipe(
+      tap((user: User)=> this.stateService.setCurrentUser(user))
+    );
   }
 
   logout() {
