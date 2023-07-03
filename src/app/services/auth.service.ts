@@ -40,4 +40,14 @@ export class AuthService {
   logout() {
     this.stateService.removeCurrentUser();
   }
+
+  register(emailAddress: string, mobileNumber: string, pin: string): Observable<User> {
+    return this.httpClient.post<User>(`${this.API_HOST}/authentication/register`, {
+      emailAddress,
+      mobileNumber,
+      pin
+    }).pipe(
+      tap((user: User) => console.log(user))
+    )
+  }
 }
