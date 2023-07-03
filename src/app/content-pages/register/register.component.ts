@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit{
     )
 
     if(this.authService.isAuthenticated()) {
-      this.router.navigateByUrl("/dashboard");
+      this.router.navigateByUrl("/app/dashboard");
     }
   }
   

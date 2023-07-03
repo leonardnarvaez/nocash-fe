@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit{
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private route: ActivatedRoute){
     this.returnUrl =
-    this.route.snapshot.queryParams["returnUrl"] || "/dashboard";
+    this.route.snapshot.queryParams["returnUrl"] || "/app/dashboard";
   } 
   
 
@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit{
 
       },
     )
+    console.log(this.returnUrl);
     if(this.authService.isAuthenticated()){
       this.router.navigateByUrl(this.returnUrl);
     }

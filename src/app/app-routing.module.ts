@@ -6,7 +6,7 @@ import { FULL_ROUTES } from './full-pages/full-layout.routes';
 import { NotFoundComponent } from './not-found.component';
 const routes: Routes = [
   {
-    path: "",
+    path: "app",
     children: FULL_ROUTES,
     canActivate: [AuthGuard],
   },
