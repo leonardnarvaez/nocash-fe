@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from "../shared/auth-guard.service";
 import { HeaderComponent } from './header/header.component'
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -16,10 +17,10 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: "boss_mH4kuL3tz",
-        component: HeaderComponent,
+        path: "home",
+        component: DashboardComponent,
         data: {
-          title: "Dashboard",
+          title: "Home",
         },
         canActivate: [AuthGuard],
       },

@@ -1,4 +1,18 @@
 @import "primeicons/primeicons.css";
+
+/* .toolbarNav{  
+    position: fixed;
+    bottom: 0; 
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    padding: 2em;
+    background-color: white;
+
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  /* -moz-box-shadow:    3px 3px 5px 6px #ccc;  Firefox 3.5 - 3.6 */
+   /* box-shadow:        2px 2px 4px 5px #ccc;  Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400');
 
 body {
@@ -37,40 +51,4 @@ body {
   flex-direction:column;
   width:85%;
 }
-
-/* .label {
-    background-color: transparent;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-  }
-  
-  .label .h-1-wrapper {
-    border: 0px none;
-    height: 44px;
-    width: 167px;
-  }
-  
-  .label .text-wrapper {
-    color: #008cb8;
-    font-family: "Josefin Sans-Bold", Helvetica;
-    font-size: 44px;
-    font-weight: 700;
-    left: 0;
-    letter-spacing: 0;
-    line-height: normal;
-    position: fixed;
-    top: 0;
-    white-space: nowrap;
-  } */
-
-  .example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-  }
-  
-  .example-full-width {
-    width: 100%;
-  }
+   

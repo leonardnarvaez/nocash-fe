@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit{
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private route: ActivatedRoute){
     this.returnUrl =
-    this.route.snapshot.queryParams["returnUrl"] || "/app/dashboard";
+    this.route.snapshot.queryParams["returnUrl"] || "/app/home";
   } 
   
 
