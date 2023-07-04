@@ -29,15 +29,16 @@ export class AuthGuard implements CanActivate {
       console.log(e);
     }
     
-    if(this.jwtService.isExpired(token))
-    {
-      alert("Session Expired HAHAHA")
-      this.router.navigate(["/login"]);
-      this.authService.logout();
-      
-    }
+
     if (this.authService.isAuthenticated()) {
-      return true;
+      if(this.jwtService.isExpired(token))
+      {
+        alert("Session Expired HAHAHA")
+        this.authService.logout();
+        return false;
+      } else {
+        return true;
+      }
     } else {
       this.router.navigate(["/login"], {
         queryParams: { returnUrl: state.url },
