@@ -1,0 +1,76 @@
+@import "primeicons/primeicons.css";
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400');
+
+body {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+      -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.iphone {
+  background-color: #F7F7F7;
+  margin: 10px;
+  height: 812px;
+  width: 375px;
+  box-shadow: 0 1px 5px -1px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  position: relative;
+  transform: scale(0.9);
+  transform-origin: top center;
+}
+
+.content {
+  z-index: 4;
+  position: absolute;
+  top: 210px;
+  margin-left:30px;
+  display:flex;
+  flex-direction:column;
+  width:85%;
+}
+
+/* .label {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .label .h-1-wrapper {
+    border: 0px none;
+    height: 44px;
+    width: 167px;
+  }
+  
+  .label .text-wrapper {
+    color: #008cb8;
+    font-family: "Josefin Sans-Bold", Helvetica;
+    font-size: 44px;
+    font-weight: 700;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: fixed;
+    top: 0;
+    white-space: nowrap;
+  } */
+
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
