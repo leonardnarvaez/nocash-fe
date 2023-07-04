@@ -1,0 +1,95 @@
+@import "primeicons/primeicons.css";
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400');
+
+body {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
+}
+
+.card {
+font-family: 'Montserrat', sans-serif;
+    align-self: stretch;
+    background-color: white;
+    border-radius: 12px;
+    display: flex;
+    flex-direction:column;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.02), 0 10px 10px rgba(0,0,0,0.0);
+}
+
+.upper-row {
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 25px;
+    padding-top: 10px;
+    align-items: center;
+}
+
+.card-item {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-item span:first-child {
+    font-size: 0.7rem;
+    font-weight: bold;
+    margin-bottom:10px;
+}
+
+.card-item span:last-child {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+.icon-item i:hover {
+    transform: scale(1.5);
+    transition: all 0.3s ease;
+    /* padding-bottom: 2px; */
+}
+
+.dollar {
+    color: #2ECC71;
+}
+
+.lower-row {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}
+
+.lower-row::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 110px;
+    width: 50%;
+    left: 25%;
+    border-top: 1px solid #E1E1E1;
+}
+
+.icon-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    color: #2ECC71;
+    padding: 10px;
+    background-color: rgba(46, 204, 113, .2);;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.icon-text {
+    font-size: 0.6em;
+    color: #939393;
+}

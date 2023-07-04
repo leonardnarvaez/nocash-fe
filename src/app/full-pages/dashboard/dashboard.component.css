@@ -1,0 +1,54 @@
+@import "primeicons/primeicons.css";
+
+/* .toolbarNav{  
+    position: fixed;
+    bottom: 0; 
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    padding: 2em;
+    background-color: white;
+
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  /* -moz-box-shadow:    3px 3px 5px 6px #ccc;  Firefox 3.5 - 3.6 */
+   /* box-shadow:        2px 2px 4px 5px #ccc;  Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400');
+
+body {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+      -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.iphone {
+  background-color: #F7F7F7;
+  margin: 10px;
+  height: 812px;
+  width: 375px;
+  box-shadow: 0 1px 5px -1px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  position: relative;
+  transform: scale(0.9);
+  transform-origin: top center;
+}
+
+.content {
+  z-index: 4;
+  position: absolute;
+  top: 210px;
+  margin-left:30px;
+  display:flex;
+  flex-direction:column;
+  width:85%;
+}
+   
