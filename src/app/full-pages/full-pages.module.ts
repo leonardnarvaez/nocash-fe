@@ -9,8 +9,8 @@ import { MenuCardComponent } from './dashboard/menu-card/menu-card.component';
 import { TransactionsHomeComponent } from './dashboard/transactions-home/transactions-home.component';
 import { HomeHeaderComponent } from './dashboard/home-header/home-header.component';
 import { HomeComponent } from './home/home.component';
-
-
+import { MerchantComponent } from './merchant/merchant.component';
+import { MerchantListComponent } from './merchant-list/merchant-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,9 @@ import { HomeComponent } from './home/home.component';
     MenuCardComponent,
     TransactionsHomeComponent,
     HomeHeaderComponent,
-    HomeComponent
+    HomeComponent,
+    MerchantComponent,
+    MerchantListComponent
   ],
   imports: [
     CommonModule,

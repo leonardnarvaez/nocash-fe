@@ -1,9 +1,10 @@
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { CrudOperations } from "./crud-operations";
+import { environment } from "../environments/environment";
 
 export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
-  private _baseUrl: string = 'https://jsonplaceholder.typicode.com';
+  private _baseUrl: string = environment.API_HOST;
 
   constructor(protected _http: HttpClient) {}
 
