@@ -3,6 +3,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router, ActivatedRoute} from '@angular/router';
 import { User } from 'src/app/models/user';
+import { catchError, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -46,10 +48,26 @@ export class LoginComponent implements OnInit{
     }
 
     this.authService.login(this.loginForm.value.mobileNumber, this.loginForm.value.pin)
+    .pipe(
+      catchError(this.handleError)
+    )
     .subscribe((user: User) => {
       this.router.navigateByUrl(this.returnUrl);
       console.log(user);
     });
     
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) 
+    {
+      console.error('An error occurred:', error.error);
+    }
+    else 
+    {
+      console.warn(error);
+      alert(error.error.message);
+    }
+    return throwError(() => new Error('HAHAHAHAHA'))
   }
 }

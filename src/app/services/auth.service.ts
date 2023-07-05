@@ -33,7 +33,7 @@ export class AuthService {
       mobileNumber,
       pin
     }).pipe(
-      tap((user: User)=> this.stateService.setCurrentUser(user))
+      tap((user: User)=> this.stateService.setCurrentUser(user)),
     );
   }
 
