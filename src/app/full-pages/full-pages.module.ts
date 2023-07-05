@@ -8,6 +8,8 @@ import { BottomNavComponent } from './dashboard/bottom-nav/bottom-nav.component'
 import { MenuCardComponent } from './dashboard/menu-card/menu-card.component';
 import { TransactionsHomeComponent } from './dashboard/transactions-home/transactions-home.component';
 import { HomeHeaderComponent } from './dashboard/home-header/home-header.component';
+import { MerchantComponent } from './merchant/merchant.component';
+import { MerchantListComponent } from './merchant-list/merchant-list.component';
 
 
 
@@ -18,7 +20,9 @@ import { HomeHeaderComponent } from './dashboard/home-header/home-header.compone
     BottomNavComponent,
     MenuCardComponent,
     TransactionsHomeComponent,
-    HomeHeaderComponent
+    HomeHeaderComponent,
+    MerchantComponent,
+    MerchantListComponent
   ],
   imports: [
     CommonModule,

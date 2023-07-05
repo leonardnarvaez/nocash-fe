@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from "../shared/auth-guard.service";
 import { HeaderComponent } from './header/header.component'
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import { MerchantComponent } from './merchant/merchant.component';
+import { MerchantListComponent } from './merchant-list/merchant-list.component';
 const routes: Routes = [
   {
     path: "",
@@ -21,6 +22,14 @@ const routes: Routes = [
         component: DashboardComponent,
         data: {
           title: "Home",
+        },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "merchants",
+        component: MerchantListComponent,
+        data: {
+          title: "Merchants",
         },
         canActivate: [AuthGuard],
       },
