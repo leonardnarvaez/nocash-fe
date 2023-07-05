@@ -8,6 +8,7 @@ import { BottomNavComponent } from './dashboard/bottom-nav/bottom-nav.component'
 import { MenuCardComponent } from './dashboard/menu-card/menu-card.component';
 import { TransactionsHomeComponent } from './dashboard/transactions-home/transactions-home.component';
 import { HomeHeaderComponent } from './dashboard/home-header/home-header.component';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -18,7 +19,8 @@ import { HomeHeaderComponent } from './dashboard/home-header/home-header.compone
     BottomNavComponent,
     MenuCardComponent,
     TransactionsHomeComponent,
-    HomeHeaderComponent
+    HomeHeaderComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,

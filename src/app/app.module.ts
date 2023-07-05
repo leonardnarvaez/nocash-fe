@@ -11,6 +11,7 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { NotFoundComponent } from './not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { IonicModule } from '@ionic/angular';
 
 
 @NgModule({
@@ -26,6 +27,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     HttpClientModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    IonicModule,
+    IonicModule.forRoot(),
     
   ],
   providers: [
