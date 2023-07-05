@@ -1,26 +1,66 @@
-<body>
-  <div class="container">
-    <div class="iphone">
-      <div class="content">
-          
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <div class="form-group col-5">
-            <label>Mobile Number</label>
-            <input
-              type="text"
-              formControlName="mobileNumber"
-              class="form-control"
-            />
+<div>
+  <div class="appHeader no-border transparent position-absolute">
+    <div class="left">
+      <a href="#" class="headerButton goBack"> </a>
+    </div>
+    <div class="pageTitle"></div>
+    <div class="right"></div>
+  </div>
+
+  <div id="appCapsule">
+    <div class="section mt-2 text-center">
+      <h1>Log in</h1>
+      <h4>Fill the form to log in</h4>
+    </div>
+    <div class="section mb-5 p-2">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="card">
+          <div class="card-body pb-1">
+            <div class="form-group basic">
+              <div class="input-wrapper">
+                <label class="label" for="email1">Mobile Number</label>
+                <input
+                  type="text"
+                  formControlName="mobileNumber"
+                  class="form-control"
+                  placeholder="Your mobile number"
+                />
+                <i class="clear-input"> </i>
+              </div>
+            </div>
+
+            <div class="form-group basic">
+              <div class="input-wrapper">
+                <label>PIN</label>
+                <input
+                  type="password"
+                  formControlName="pin"
+                  class="form-control"
+                  placeholder="Your PIN"
+                />
+                <i class="clear-input"> </i>
+              </div>
+            </div>
           </div>
-          <div class="form-group col-5">
-            <label>Pin</label>
-            <input type="password" formControlName="pin" class="form-control" />
+        </div>
+
+        <div class="form-links mt-2">
+          <div>
+            <a href="app-register.html">Register Now</a>
           </div>
-          <div class="text-center">
-            <button class="btn btn-primary mr-1" type="submit">Submit</button>
+          <div>
+            <a href="app-forgot-password.html" class="text-muted"
+              >Forgot Password?</a
+            >
           </div>
-        </form>
-      </div>
+        </div>
+
+        <div class="form-button-group transparent">
+          <button class="btn btn-primary btn-block btn-lg" type="submit">
+            Log in
+          </button>
+        </div>
+      </form>
     </div>
   </div>
-</body>
+</div>
