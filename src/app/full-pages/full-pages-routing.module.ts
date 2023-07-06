@@ -32,6 +32,10 @@ const routes: Routes = [
         },
         canActivate: [AuthGuard],
       },
+      {
+        path: "authentication-history",
+        loadChildren: () => import('./authentication-history/authentication-history.module').then(m => m.AuthenticationHistoryModule)
+      }
     ]
     }
 ];

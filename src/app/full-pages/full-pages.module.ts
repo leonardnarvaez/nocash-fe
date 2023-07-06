@@ -11,6 +11,7 @@ import { HomeHeaderComponent } from './dashboard/home-header/home-header.compone
 import { HomeComponent } from './home/home.component';
 import { MerchantComponent } from './merchant/merchant.component';
 import { MerchantListComponent } from './merchant-list/merchant-list.component';
+import { AuthenticationHistoryModule } from './authentication-history/authentication-history.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MerchantListComponent } from './merchant-list/merchant-list.component';
   imports: [
     CommonModule,
     FullPagesRoutingModule,
+    AuthenticationHistoryModule
   ]
 })
 export class FullPagesModule { }
