@@ -33,16 +33,10 @@
                 <div class="balance">
                     <div class="left">
                         <span class="title">Total Balance</span>
-                        <h1 class="total">$ 2,562.50</h1>
-                    </div>
-                    <div class="right">
-                        <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#depositActionSheet">
-                            <i class="pi pi-plus"></i>
-                        </a>
+                        <h1 class="total">$ {{walletBalance}}</h1>
                     </div>
                 </div>
                 <!-- * Balance -->
-
                 <!-- Wallet Footer -->
                 <div class="wallet-footer">
                     <div class="item">
@@ -50,7 +44,7 @@
                             <div class="icon-wrapper bg-danger">
                                 <i class="pi pi-arrow-down"></i>
                             </div>
-                            <strong>Withdraw</strong>
+                            <strong>Top Up</strong>
                         </a>
                     </div>
                     <div class="item">
@@ -62,7 +56,7 @@
                         </a>
                     </div>
                     <div class="item">
-                        <a href="app-cards.html">
+                        <a routerLink="/app/merchants">
                             <div class="icon-wrapper bg-success">
                                 <i class="pi pi-wallet"></i>
                             </div>
