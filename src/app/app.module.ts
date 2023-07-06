@@ -26,6 +26,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     HttpClientModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    
   ],
   providers: [
     AuthService,

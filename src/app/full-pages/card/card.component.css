@@ -1,0 +1,13 @@
+#appCapsuleCard {
+    padding: 0px;
+    margin-bottom: env(safe-area-inset-bottom);
+    margin-top: env(safe-area-inset-top)
+}
+
+#appCapsuleCard.extra-header-active {
+    padding-top: 106px
+}
+
+#appCapsuleCard.full-height {
+    min-height: 100vh
+}

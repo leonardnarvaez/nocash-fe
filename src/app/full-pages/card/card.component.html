@@ -1,0 +1,54 @@
+
+<div>
+  <!-- App Capsule -->
+  <div id="appCapsuleCard">
+    <div class="section mt-2">
+      <!-- card block -->
+      <div class="card-block mb-2">
+        <div class="card-main">
+          <div class="card-button dropdown">
+            <button
+              type="button"
+              class="btn btn-link btn-icon"
+              data-bs-toggle="dropdown"
+            >
+              <i class="pi pi-ellipsis-h"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+              <a class="dropdown-item" href="#">
+                <i class="pi pi-pencil"></i>>Edit
+              </a>
+              <a class="dropdown-item" href="#">
+                <i class="pi pi-times"></i>>Remove
+              </a>
+            </div>
+          </div>
+          <div class="balance">
+            <span class="label">NAME</span>
+            <h1 class="title">
+                {{card.name}}
+            </h1>
+          </div>
+          <div class="in">
+            <div class="card-number">
+              <span class="label">Card Number</span>
+              {{ card.accountNumber }}
+            </div>
+            <div class="bottom">
+              <div class="card-expiry">
+                <span class="label">Expiry</span>
+                {{ card.expiryDate }}
+              </div>
+              <div class="card-ccv">
+                <span class="label">CCV</span>
+                {{ card.cvv }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- * card block -->
+    </div>
+  </div>
+  <!-- * App Capsule -->
+</div>

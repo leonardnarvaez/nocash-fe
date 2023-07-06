@@ -11,6 +11,11 @@ import { HomeHeaderComponent } from './dashboard/home-header/home-header.compone
 import { HomeComponent } from './home/home.component';
 import { MerchantComponent } from './merchant/merchant.component';
 import { MerchantListComponent } from './merchant-list/merchant-list.component';
+import { CardComponent } from './card/card.component';
+import { CardListComponent } from './card-list/card-list.component';
+import { AddCardFormComponent } from './add-card-form/add-card-form.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { AuthenticationHistoryModule } from './authentication-history/authentication-history.module';
 
 @NgModule({
   declarations: [
@@ -22,11 +27,17 @@ import { MerchantListComponent } from './merchant-list/merchant-list.component';
     HomeHeaderComponent,
     HomeComponent,
     MerchantComponent,
-    MerchantListComponent
+    MerchantListComponent,
+    CardComponent,
+    CardListComponent,
+    AddCardFormComponent
   ],
   imports: [
     CommonModule,
     FullPagesRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    AuthenticationHistoryModule
   ]
 })
 export class FullPagesModule { }
