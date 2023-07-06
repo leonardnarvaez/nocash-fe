@@ -1,0 +1,28 @@
+<!-- <div id="appCapsule"> -->
+
+
+    <div class="card jon" [ngClass]="authenticationHistory.authenticationType === 'LOGIN'? 'login': 'logout'">
+        <!-- <div class=""> -->
+            <div class="item">
+                <div class="icon-box text-danger">
+                    
+                </div>
+                <div class="in">
+                    <div>
+                        <strong>{{authenticationHistory.authenticationType}}</strong>
+                        <div class="text-small text-secondary">{{authenticationHistory.ipAddress}}</div>
+                        <div class="text-small text-secondary">{{authenticationHistory.userAgent}}</div>
+                    </div>
+                    <div class="text-end">
+                        <strong>{{authenticationHistory.creationTime | date:'short'}}</strong>
+                        <div class="text-small">
+                            <span class="badge" [ngClass]="authenticationHistory.isAuthenticationResultSuccess? 'badge-success': 'badge-danger'">
+                                {{authenticationHistory.isAuthenticationResultSuccess? 'success' : 'failed'}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- </div> -->
+    </div>
+<!-- </div> -->

@@ -15,6 +15,7 @@ import { CardComponent } from './card/card.component';
 import { CardListComponent } from './card-list/card-list.component';
 import { AddCardFormComponent } from './add-card-form/add-card-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { AuthenticationHistoryModule } from './authentication-history/authentication-history.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     CommonModule,
     FullPagesRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AuthenticationHistoryModule
   ]
 })
 export class FullPagesModule { }

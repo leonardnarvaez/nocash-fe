@@ -38,9 +38,11 @@ export class AuthService {
   }
 
   logout() {
-    this.stateService.removeCurrentUser();
-    return this.httpClient.get(`${this.API_HOST}/authentication/authenticate`).pipe(
-      tap(message => console.log(message))
+    return this.httpClient.get(`${this.API_HOST}/authentication/logout`).pipe(
+      tap(message => {
+        console.log(message);
+        this.stateService.removeCurrentUser();
+      })
     );
   }
 

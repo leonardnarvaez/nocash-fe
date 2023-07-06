@@ -1,0 +1,10 @@
+<p>authentication-history-list works!</p>
+
+    <div class="section mt-2">
+        <div *ngFor="let authHist of authenticationHistoryList">
+            <!-- <li> -->
+                <app-authentication-history-card [authenticationHistory]="authHist"></app-authentication-history-card>
+            <!-- </li> -->
+        </div>
+    </div>
+
