@@ -1,0 +1,26 @@
+  <!-- App Header -->
+  <div style="padding-bottom: 60px;">
+  <div class="appHeader">
+    <div class="left">
+      <a href="#" class="headerButton goBack">
+        <i class="pi pi pi-angle-left"></i>
+      </a>
+    </div>
+    <div class="pageTitle">My Cards</div>
+    <div class="right">
+      <a
+        href="#"
+        class="headerButton"
+        data-bs-toggle="modal"
+        data-bs-target="#addCardActionSheet"
+      >
+        <i class="pi pi-plus"></i>
+      </a>
+    </div>
+  </div>
+</div>
+  <!-- * App Header -->
+
+<div class="transactions" *ngFor="let card of cards">
+    <app-card [card]="card"></app-card>
+</div>

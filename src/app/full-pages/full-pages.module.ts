@@ -11,6 +11,8 @@ import { HomeHeaderComponent } from './dashboard/home-header/home-header.compone
 import { HomeComponent } from './home/home.component';
 import { MerchantComponent } from './merchant/merchant.component';
 import { MerchantListComponent } from './merchant-list/merchant-list.component';
+import { CardComponent } from './card/card.component';
+import { CardListComponent } from './card-list/card-list.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { MerchantListComponent } from './merchant-list/merchant-list.component';
     HomeHeaderComponent,
     HomeComponent,
     MerchantComponent,
-    MerchantListComponent
+    MerchantListComponent,
+    CardComponent,
+    CardListComponent
   ],
   imports: [
     CommonModule,
