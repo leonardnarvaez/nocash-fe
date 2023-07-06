@@ -10,11 +10,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { NotFoundComponent } from './not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-<<<<<<< HEAD
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-=======
->>>>>>> 6d332a6fe2db917bf79b7a7476153c736fc271d1
 
 @NgModule({
   declarations: [
@@ -28,11 +25,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-<<<<<<< HEAD
     FlexLayoutModule,
-=======
-    
->>>>>>> 6d332a6fe2db917bf79b7a7476153c736fc271d1
   ],
   providers: [
     AuthService,

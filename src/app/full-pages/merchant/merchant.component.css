@@ -1,4 +1,11 @@
-.item {
+
+
+#appCapsuleMerchant {
+    padding-top: 10px;
+    padding-bottom: 0px;
+  }
+
+#appCapsuleMerchant .section .item {
     background: #ffffff;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,0.09);
     border-radius: 10px;
@@ -6,44 +13,48 @@
     margin-bottom: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-between
-}
-
-.item:last-child {
-    margin-bottom: 0
-}
-
-.item p {
+    justify-content: space-between;
+  }
+  
+  #appCapsuleMerchant .section .item:last-child {
+    margin-bottom: 0;
+  }
+  
+  #appCapsuleMerchant .section .item p {
     font-size: 11px;
     margin: 0;
     color: #958d9e;
-    font-weight: 500
-}
-
-.item .detail {
+    font-weight: 500;
+  }
+  
+  #appCapsuleMerchant .section .item .detail {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    line-height: 1.2em
-}
-
-.item .detail .image-block {
-    margin-right: 16px
-}
-
-.item .detail strong {
+    line-height: 1.2em;
+  }
+  
+  #appCapsuleMerchant .section .item .detail .image-block {
+    margin-right: 16px;
+  }
+  
+  #appCapsuleMerchant .section .item .detail strong {
     display: block;
     font-weight: 500;
     color: #27173E;
-    margin-bottom: 3px
-}
-
-.item .right {
-    padding-left: 10px
-}
-
-.item .right .price {
+    margin-bottom: 3px;
+  }
+  
+  #appCapsuleMerchant .section .item .right {
+    padding-left: 10px;
+  }
+  
+  #appCapsuleMerchant .section .item .right .price {
     font-weight: 700;
     color: #27173E;
-    letter-spacing: -0.03em
-}
+    letter-spacing: -0.03em;
+  }
+  
+  #appCapsuleMerchant .section .item + .item {
+    margin-top: 5px;
+  }
