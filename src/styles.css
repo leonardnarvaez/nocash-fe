@@ -331,62 +331,18 @@ a:hover,a:active,a:focus {
 }
 
 #appCapsule {
-    padding-top: 3.5%;
-  }
+    padding: 56px 0;
+    margin-bottom: env(safe-area-inset-bottom);
+    margin-top: env(safe-area-inset-top)
+}
 
-#appCapsule .section .item {
-    background: #ffffff;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.09);
-    border-radius: 10px;
-    padding: 20px 24px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  #appCapsule .section .item:last-child {
-    margin-bottom: 0;
-  }
-  
-  #appCapsule .section .item p {
-    font-size: 11px;
-    margin: 0;
-    color: #958d9e;
-    font-weight: 500;
-  }
-  
-  #appCapsule .section .item .detail {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    line-height: 1.2em;
-  }
-  
-  #appCapsule .section .item .detail .image-block {
-    margin-right: 16px;
-  }
-  
-  #appCapsule .section .item .detail strong {
-    display: block;
-    font-weight: 500;
-    color: #27173E;
-    margin-bottom: 3px;
-  }
-  
-  #appCapsule .section .item .right {
-    padding-left: 10px;
-  }
-  
-  #appCapsule .section .item .right .price {
-    font-weight: 700;
-    color: #27173E;
-    letter-spacing: -0.03em;
-  }
-  
-  #appCapsule .section .item + .item {
-    margin-top: 5px;
-  }
+#appCapsule.extra-header-active {
+    padding-top: 106px
+}
+
+#appCapsule.full-height {
+    min-height: 100vh
+}
 
 .section {
     padding: 0 16px
