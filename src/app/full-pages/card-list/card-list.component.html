@@ -13,6 +13,7 @@
         class="headerButton"
         data-bs-toggle="modal"
         data-bs-target="#addCardActionSheet"
+        routerLinkActive="active" routerLink="/app/create"
       >
         <i class="pi pi-plus"></i>
       </a>
@@ -21,6 +22,8 @@
 </div>
   <!-- * App Header -->
 
-<div class="transactions" *ngFor="let card of cards">
+  <div class="transactions" *ngFor="let card of cards">
     <app-card [card]="card"></app-card>
-</div>
+  </div>
+  
+

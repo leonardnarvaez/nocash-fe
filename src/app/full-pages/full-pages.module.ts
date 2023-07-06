@@ -13,6 +13,8 @@ import { MerchantComponent } from './merchant/merchant.component';
 import { MerchantListComponent } from './merchant-list/merchant-list.component';
 import { CardComponent } from './card/card.component';
 import { CardListComponent } from './card-list/card-list.component';
+import { AddCardFormComponent } from './add-card-form/add-card-form.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,11 +28,14 @@ import { CardListComponent } from './card-list/card-list.component';
     MerchantComponent,
     MerchantListComponent,
     CardComponent,
-    CardListComponent
+    CardListComponent,
+    AddCardFormComponent
   ],
   imports: [
     CommonModule,
     FullPagesRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class FullPagesModule { }

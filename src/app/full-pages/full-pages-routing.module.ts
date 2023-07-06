@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component'
 import { HomeComponent } from './home/home.component';
 import { MerchantListComponent } from './merchant-list/merchant-list.component';
 import { CardListComponent } from './card-list/card-list.component';
+import { AddCardFormComponent } from './add-card-form/add-card-form.component';
 const routes: Routes = [
   {
     path: "",
@@ -38,6 +39,14 @@ const routes: Routes = [
         component: CardListComponent,
         data: {
           title: "Cards"
+        },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: "create",
+        component: AddCardFormComponent,
+        data: {
+          title: "Add Card"
         },
         canActivate: [AuthGuard]
       }

@@ -9,6 +9,7 @@ import { Card } from 'src/app/models/card';
   styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit{
+  cards: Card[] = [];
   constructor(private cardService: CardService, private router: Router){
 
   }
@@ -16,6 +17,7 @@ export class CardComponent implements OnInit{
 
   ngOnInit(): void {
     this.cardService.findAll().subscribe((cards: Card[]) => {
+      this.cards = cards;
       console.log(cards);
     })
   }
