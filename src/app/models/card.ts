@@ -5,6 +5,7 @@ export class Card {
         public accountNumber?: String,
         public expiryDate?: String,
         public cvv?: String,
-        public createdDate?: Date
+        public createdDate?: Date,
+        public color?: string
     ){ }
 }
