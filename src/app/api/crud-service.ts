@@ -28,6 +28,11 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     return this._http.delete<T>(this._baseUrl + "/" + id);
   }
 
+  deleteCard(id: ID): Observable<T> {
+    const url = this._baseUrl.endsWith('/') ? `${this._baseUrl}${id}` : `${this._baseUrl}/${id}`;
+    return this._http.delete<T>(url);
+  }
+
   baseUrl(endpoint: string): void {
     this._baseUrl = `${this._baseUrl}${endpoint}`;
   }
