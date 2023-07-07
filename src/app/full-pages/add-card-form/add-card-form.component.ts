@@ -4,6 +4,7 @@ import { Card } from 'src/app/models/card';
 import { CardService } from 'src/app/services/card.service';
 import { NgZone } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-card-form',
@@ -18,7 +19,8 @@ export class AddCardFormComponent {
     private cardService: CardService,
     private fb: FormBuilder,
     private ngZone: NgZone,
-    private router: Router
+    private router: Router,
+    private location: Location
     ) {
       this.cardForm = this.fb.group(
         {
@@ -42,5 +44,9 @@ export class AddCardFormComponent {
         console.error('Failed to add card:', error);
       }
     );
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
