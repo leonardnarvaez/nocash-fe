@@ -20,7 +20,7 @@
   <!-- * App Header -->
 
   <div class="transactions" *ngFor="let card of cards">
-    <app-card [card]="card"></app-card>
+    <app-card [card]="card" (cardDeleted)="onCardDeleted($event)"></app-card>
   </div>
   
 

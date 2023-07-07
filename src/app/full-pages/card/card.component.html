@@ -3,25 +3,26 @@
   <!-- App Capsule -->
   <div id="appCapsuleCard">
     <div class="section mt-2">
+
       <!-- card block -->
-      <div class="card-block mb-2">
+      <div class="card-block mb-2" [style.background]="card.color">
         <div class="card-main">
           <div class="card-button dropdown">
             <button
               type="button"
+              (click)="deleteCard(card)"
               class="btn btn-link btn-icon"
-              data-bs-toggle="dropdown"
             >
               <i class="pi pi-ellipsis-h"></i>
             </button>
-            <div class="dropdown-menu dropdown-menu-end">
+            <!-- <div class="dropdown-menu dropdown-menu-end">
               <a class="dropdown-item" href="#">
                 <i class="pi pi-pencil"></i>>Edit
               </a>
               <a class="dropdown-item" href="#">
                 <i class="pi pi-times"></i>>Remove
               </a>
-            </div>
+            </div> -->
           </div>
           <div class="balance">
             <span class="label">NAME</span>
@@ -48,6 +49,7 @@
         </div>
       </div>
       <!-- * card block -->
+
     </div>
   </div>
   <!-- * App Capsule -->
