@@ -28,15 +28,19 @@ export class JwtService {
     const [jwtHeader, jwtPayload, jwtSignature] = tokens;
     const payload = this.extractPayload(jwt);
     const expireDateUnixTimestamp: number = payload['exp'] as number;
+    const issuedAtDateUnixTimestamp: number = payload['iat'] as number;
     console.log(expireDateUnixTimestamp);
   
-    const expireDate: Date = new Date(expireDateUnixTimestamp*1000);
+    const expireDate: Date = new Date(expireDateUnixTimestamp * 1000);
+    const issuedDate: Date = new Date(issuedAtDateUnixTimestamp * 1000);
     const now: Date = new Date();
     console.log(jwtPayload);
     
     console.log(`current: ${now}`);
+    console.log(`issued at: ${issuedDate}`);
+    
     console.log(`expireTime: ${expireDate}`);
   
-    return now > expireDate
+    return now > expireDate || now < issuedDate;
   };
 }
