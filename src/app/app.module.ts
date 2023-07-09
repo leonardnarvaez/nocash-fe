@@ -11,6 +11,7 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { NotFoundComponent } from './not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ErrorHandlerInterceptorService } from './services/error-handler-interceptor.service';
 
 
 @NgModule({
@@ -33,7 +34,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AuthGuard,
     AuthStateService,
     {
-      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true
+      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptorService, multi: true,
     }
   ],
   bootstrap: [AppComponent]
