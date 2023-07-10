@@ -33,7 +33,7 @@ export class AuthGuard implements CanActivate {
     if (this.authService.isAuthenticated()) {
       if(this.jwtService.isExpired(token))
       {
-        alert("Session Expired HAHAHA")
+        alert("Session Expired, Please login before proceeding.")
         this.authStateService.removeCurrentUser();
         return false;
       } else {

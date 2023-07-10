@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { MerchantListComponent } from './merchant-list/merchant-list.component';
 import { CardListComponent } from './card-list/card-list.component';
 import { AddCardFormComponent } from './add-card-form/add-card-form.component';
+import { CashInComponent } from './cash-in/cash-in.component';
 const routes: Routes = [
   {
     path: "",
@@ -47,6 +48,14 @@ const routes: Routes = [
         component: AddCardFormComponent,
         data: {
           title: "Add Card"
+        },
+        
+      },
+      {
+        path: "top-up",
+        component: CashInComponent,
+        data: {
+          title: "Top Up"
         },
         
       },

@@ -35,4 +35,5 @@ export class CardListComponent implements OnInit{
   onCardDeleted(deletedCard: Card) {
     this.cards = this.cards.filter(card => card.id !== deletedCard.id);
   }
+
 }
