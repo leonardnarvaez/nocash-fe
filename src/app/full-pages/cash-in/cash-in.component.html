@@ -1,1 +1,13 @@
-<p>cash-in works!</p>
+
+  <div style="padding-bottom: 60px;">
+    <div class="appHeader">
+      <div class="left">
+          <i class=" headerButton pi pi-arrow-left" (click)="goBack()"></i>
+      </div>
+      <div class="pageTitle">Top Up</div>
+    </div>
+  </div>
+  
+    <div class="transactions" *ngFor="let card of cards">
+      <app-card [card]="card" (click)="test(card.id)"></app-card>
+    </div>
