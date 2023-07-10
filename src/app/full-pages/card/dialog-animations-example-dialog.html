@@ -1,0 +1,28 @@
+
+<div class="modal-dialog">
+  <div class="modal-content" role="document">
+    <div class="modal-header">
+      <div class="modal-title">Confirmation</div>
+    </div>
+    <h5 class="modal-body">{{ data.message }}</h5>
+    <div class="modal-footer">
+      <div class="btn-list">
+
+        <a class="btn btn-text-primary btn-block"  (click)="dialogRef.close(true)" data-bs-dismiss="modal">
+          <i class="pi pi-check"></i>
+          Delete
+        </a>
+        <a class="btn btn-text-danger btn-block"  (click)="dialogRef.close(false)" data-bs-dismiss="modal">
+          <i class="pi pi-times"></i>
+          Cancel
+        </a>
+        <!-- <button
+          class="btn btn-text-danger btn-block"
+          
+        >
+          Delete
+        </button> -->
+      </div>
+    </div>
+  </div>
+</div>

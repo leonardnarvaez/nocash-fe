@@ -1,8 +1,6 @@
 <div class="appHeader">
   <div class="left">
-    <button (click)="goBack()" class="headerButton goBack">
-      <i class="pi pi-angle-left"></i>
-    </button>
+    <i (click)="goBack()" class="pi pi-angle-left headerButton"></i>
   </div>
   <div class="pageTitle">Add a New Card</div>
   <div class="right"></div>
@@ -34,14 +32,61 @@
           <div class="form-group basic">
             <div class="input-wrapper">
               <label class="label" for="accountNumber">Card Number</label>
-              <input
-                type="text"
-                id="accountNumber"
-                formControlName="accountNumber"
-                class="form-control"
-                placeholder="Enter your 12-digit account number."
-                required
-              />
+              <div class="input-group">
+                <input
+                  type="text"
+                  id="accountNumber"
+                  formControlName="accountNumber"
+                  class="form-control"
+                  placeholder="Enter your 16-digit account number."
+                  required
+                  minlength="16"
+                  maxlength="16"
+                />
+                <i
+                  class="pi pi-times-circle"
+                  *ngIf="
+                    cardForm.controls['accountNumber'].value &&
+                    (cardForm.controls['accountNumber'].dirty ||
+                      cardForm.controls['accountNumber'].touched)
+                  "
+                  (click)="resetAccountNumber()"
+                  style="margin-top: 10px"
+                ></i>
+              </div>
+
+              <div
+                *ngIf="
+                  cardForm.controls['accountNumber'].invalid &&
+                  (cardForm.controls['accountNumber'].dirty ||
+                    cardForm.controls['accountNumber'].touched)
+                "
+              >
+                <div
+                  class="text-danger"
+                  *ngIf="cardForm.controls['accountNumber'].errors?.['required']"
+                >
+                  Account number is required.
+                </div>
+                <div
+                  class="text-danger"
+                  *ngIf="cardForm.controls['accountNumber'].errors?.['minlength']"
+                >
+                  Account number must be 16 characters long.
+                </div>
+                <div
+                  class="text-danger"
+                  *ngIf="cardForm.controls['accountNumber'].errors?.['maxlength']"
+                >
+                  Account number must be 16 characters long.
+                </div>
+                <div
+                  class="text-danger"
+                  *ngIf="cardForm.controls['accountNumber'].errors?.['pattern']"
+                >
+                  Account number must be 16 digit numeric combination.
+                </div>
+              </div>
             </div>
           </div>
           <!-- Card Number -->
@@ -66,7 +111,41 @@
                 formControlName="cvv"
                 placeholder="Enter your 3-digit CVV."
                 required
+                minlength="3"
+                maxlength="3"
               />
+            </div>
+          </div>
+          <div
+            *ngIf="
+              cardForm.controls['cvv'].invalid &&
+              (cardForm.controls['cvv'].dirty ||
+                cardForm.controls['cvv'].touched)
+            "
+          >
+            <div
+              class="text-danger"
+              *ngIf="cardForm.controls['cvv'].errors?.['required']"
+            >
+              CVV is required.
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="cardForm.controls['cvv'].errors?.['minlength']"
+            >
+              CVV must be 3 digits long.
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="cardForm.controls['cvv'].errors?.['maxlength']"
+            >
+              CVV must be 3 digits long.
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="cardForm.controls['cvv'].errors?.['pattern']"
+            >
+              CVV must be 3 digit numeric combination.
             </div>
           </div>
           <!-- CVV -->
@@ -86,7 +165,11 @@
           </div>
 
           <div class="form-group basic mt-2">
-            <button type="submit" class="btn btn-primary btn-block btn-lg">
+            <button
+              type="submit"
+              class="btn btn-primary btn-block btn-lg"
+              [disabled]="!cardForm.valid"
+            >
               Add
             </button>
           </div>
