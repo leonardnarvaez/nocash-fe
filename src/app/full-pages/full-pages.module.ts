@@ -16,6 +16,7 @@ import { CardListComponent } from './card-list/card-list.component';
 import { AddCardFormComponent } from './add-card-form/add-card-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthenticationHistoryModule } from './authentication-history/authentication-history.module';
+import { CashInComponent } from './cash-in/cash-in.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AuthenticationHistoryModule } from './authentication-history/authentica
     MerchantListComponent,
     CardComponent,
     CardListComponent,
-    AddCardFormComponent
+    AddCardFormComponent,
+    CashInComponent
   ],
   imports: [
     CommonModule,
