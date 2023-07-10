@@ -32,6 +32,10 @@ a:hover,a:active,a:focus {
     width: 0
 }
 
+.pi-arrow-left {
+    cursor: pointer;
+}
+
 .appHeader {
     height: 56px;
     display: flex;
