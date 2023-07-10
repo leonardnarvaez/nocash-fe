@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit{
     )
 
     if(this.authService.isAuthenticated()) {
-      this.router.navigateByUrl("/app/dashboard");
+      this.router.navigateByUrl("/app/home");
     }
   }
   
@@ -66,7 +66,7 @@ export class RegisterComponent implements OnInit{
       alert(error.error.message);
     }
     // to prevent a bug where if the logout request failed 
-    this.stateService.removeCurrentUser();
+    // this.stateService.removeCurrentUser();
     return throwError(() => new Error('HAHAHAHAHA'))
   }
 }
