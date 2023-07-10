@@ -8,13 +8,15 @@
       <div class="card-block mb-2" [style.background]="card.color">
         <div class="card-main">
           <div class="card-button dropdown">
-            <button
+            <a
               type="button"
               (click)="deleteCard(card)"
               class="btn btn-link btn-icon"
+              data-bs-toggle="modal"
+              data-bs-target="#DialogIconedButton"
             >
               <i class="pi pi-ellipsis-h"></i>
-            </button>
+          </a>
             <!-- <button mat-raised-button (click)="openDialog('0ms', '0ms')"><i class="pi pi-ellipsis-h"></i></button> -->
           </div>
           <div class="balance">
