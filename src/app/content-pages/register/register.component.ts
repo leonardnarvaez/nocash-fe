@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { HttpErrorResponse } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
+import { AuthStateService } from 'src/app/shared/auth-state.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,12 @@ export class RegisterComponent implements OnInit{
   registerForm!: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private route: ActivatedRoute) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService, 
+    private router: Router, 
+    private route: ActivatedRoute,
+    private stateService: AuthStateService) {
   }
 
   ngOnInit(): void {
@@ -59,6 +65,8 @@ export class RegisterComponent implements OnInit{
       console.warn(error);
       alert(error.error.message);
     }
+    // to prevent a bug where if the logout request failed 
+    this.stateService.removeCurrentUser();
     return throwError(() => new Error('HAHAHAHAHA'))
   }
 }

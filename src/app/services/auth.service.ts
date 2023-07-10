@@ -38,6 +38,7 @@ export class AuthService {
   }
 
   logout() {
+    console.info("logout")
     return this.httpClient.get(`${this.API_HOST}/authentication/logout`).pipe(
       tap(message => {
         console.log(message);
