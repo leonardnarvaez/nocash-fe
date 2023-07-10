@@ -11,6 +11,8 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { NotFoundComponent } from './not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     HttpClientModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    
+    FormsModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [
     AuthService,

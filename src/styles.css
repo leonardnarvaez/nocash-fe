@@ -42,8 +42,8 @@ a:hover,a:active,a:focus {
     left: 0;
     right: 0;
     z-index: 999;
-    background: #6236FF;
-    color: #FFFFFF;
+    background: #FFFFFF;
+    color: #27173E;
     border-bottom: 1px solid #DCDCE9
 }
 
@@ -90,7 +90,7 @@ a:hover,a:active,a:focus {
     align-items: center;
     justify-content: center;
     padding: 10px;
-    color: #FFFFFF;
+    color: #6236FF;
     position: relative
 }
 
@@ -125,6 +125,10 @@ a:hover,a:active,a:focus {
 }
 
 .appHeader.text-light {
+    color: #FFF
+}
+
+.appHeader.text-light .headerButton {
     color: #FFF
 }
 
