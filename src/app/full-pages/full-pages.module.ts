@@ -32,7 +32,7 @@ import { CashInComponent } from './cash-in/cash-in.component';
     CardComponent,
     CardListComponent,
     AddCardFormComponent,
-    CashInComponent
+    CashInComponent,
   ],
   imports: [
     CommonModule,

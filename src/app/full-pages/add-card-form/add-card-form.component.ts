@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Card } from 'src/app/models/card';
 import { CardService } from 'src/app/services/card.service';
 import { NgZone } from '@angular/core';
@@ -24,15 +24,18 @@ export class AddCardFormComponent {
     ) {
       this.cardForm = this.fb.group(
         {
-          accountNumber: [""],
-          name: [""],
-          expiryDate: [""],
-          cvv: [""]
+          accountNumber: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16), Validators.pattern('[0-9]{16}')]],
+          name: ['', Validators.required],
+          expiryDate: ['', Validators.required],
+          cvv: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3), Validators.pattern('[0-9]{3}')]]
         }
       )
     }
 
   createCard() {
+    if (this.cardForm.invalid) {
+      return;
+    }
     console.log(this.cardForm.value);
     this.cardService.save(this.cardForm.value).subscribe(
       (response: Card) => {
@@ -48,5 +51,10 @@ export class AddCardFormComponent {
 
   goBack() {
     this.location.back();
+  }
+
+  resetAccountNumber() {
+    this.cardForm.get('accountNumber')?.setValue('');
+    this.cardForm.get('accountNumber')?.setErrors(null);
   }
 }
