@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { MessageService } from 'src/app/services/message.service';
 import { environment } from 'src/app/environments/environment';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-cash-in-form',
@@ -25,7 +26,7 @@ export class CashInFormComponent {
   ) {
     this.topUpForm = this.formBuilder.group (
       {
-        balance: ['', [Validators.required]],
+        balance: ['', [Validators.required, this.positiveBalanceValidator]],
         pin: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
       }
     )
@@ -41,19 +42,45 @@ export class CashInFormComponent {
 
     const payload = {
       amount: this.topUpForm.get('balance')?.value,
-      cardId: this.cardId
+      cardId: this.cardId,
+      pin: this.topUpForm.get('pin')?.value
     }
-    this.http.post<HttpResponse<any>>(this.urlEndPoint, payload).subscribe(
+    this.http.post<HttpResponse<any>>(this.urlEndPoint, payload)
+    .pipe(
+      catchError(this.handleError)
+    )
+    .subscribe(
       (response: HttpResponse<any>) => {
         console.log(response)
+        alert('Top Up Complete!')
+        this.router.navigateByUrl('/app/home')
       }
     )
-    alert('Top Up Complete!')
-    this.router.navigateByUrl('/app/home')
+  }
+
+  positiveBalanceValidator(control: AbstractControl) {
+    const balance = control.value;
+    if (balance < 0) {
+      return { negative: true };
+    }
+    return null;
   }
 
   goBack(): void {
     this.location.back();
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) 
+    {
+      console.error('An error occurred:', error.error);
+    }
+    else 
+    {
+      console.warn(error);
+      alert("Invalid details, please enter your correct PIN");
+    }
+    return throwError(() => new Error(''))
   }
 
 }
