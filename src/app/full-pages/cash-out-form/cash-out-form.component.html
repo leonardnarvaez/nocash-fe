@@ -3,7 +3,7 @@
       <div class="left">
           <i class=" headerButton pi pi-arrow-left" (click)="goBack()"></i>
       </div>
-      <div class="pageTitle">Top Up</div>
+      <div class="pageTitle">Cash Out</div>
     </div>
   </div>
 <div id="appCapsule">
@@ -11,7 +11,7 @@
       <div class="section-title">Enter the required details below.</div>
       <div class="card">
         <div class="card-body">
-          <form [formGroup]="topUpForm" (ngSubmit)="sendBalance()">
+          <form [formGroup]="cashOutForm" (ngSubmit)="sendBalance()">
             <!-- Card Name -->
             <div class="form-group basic">
               <div class="input-wrapper">
@@ -24,7 +24,7 @@
                   placeholder="Enter desired amount to be added to your account."
                   required
                 />
-                <div class="text-danger" *ngIf="topUpForm.controls['balance'].errors?.['negative']">
+                <div class="text-danger" *ngIf="cashOutForm.controls['balance'].errors?.['negative']">
                     Balance cannot be negative.
                   </div>
               </div>
@@ -49,9 +49,9 @@
                   <i
                     class="pi pi-times-circle"
                     *ngIf="
-                      topUpForm.controls['pin'].value &&
-                      (topUpForm.controls['pin'].dirty ||
-                        topUpForm.controls['pin'].touched)
+                      cashOutForm.controls['pin'].value &&
+                      (cashOutForm.controls['pin'].dirty ||
+                        cashOutForm.controls['pin'].touched)
                     "
                     style="margin-top: 10px"
                   ></i>
@@ -59,26 +59,26 @@
   
                 <div
                   *ngIf="
-                    topUpForm.controls['pin'].invalid &&
-                    (topUpForm.controls['pin'].dirty ||
-                      topUpForm.controls['pin'].touched)
+                    cashOutForm.controls['pin'].invalid &&
+                    (cashOutForm.controls['pin'].dirty ||
+                      cashOutForm.controls['pin'].touched)
                   "
                 >
                   <div
                     class="text-danger"
-                    *ngIf="topUpForm.controls['pin'].errors?.['required']"
+                    *ngIf="cashOutForm.controls['pin'].errors?.['required']"
                   >
                     PIN is required.
                   </div>
                   <div
                     class="text-danger"
-                    *ngIf="topUpForm.controls['pin'].errors?.['minlength']"
+                    *ngIf="cashOutForm.controls['pin'].errors?.['minlength']"
                   >
                     PIN must be 4 characters long.
                   </div>
                   <div
                     class="text-danger"
-                    *ngIf="topUpForm.controls['pin'].errors?.['maxlength']"
+                    *ngIf="cashOutForm.controls['pin'].errors?.['maxlength']"
                   >
                     PIN must be 4 characters long.
                   </div>
@@ -91,7 +91,7 @@
               <button
                 type="submit"
                 class="btn btn-primary btn-block btn-lg"
-                [disabled]="!topUpForm.valid"
+                [disabled]="!cashOutForm.valid"
               >
                 Add
               </button>
