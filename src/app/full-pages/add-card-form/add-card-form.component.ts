@@ -5,6 +5,9 @@ import { CardService } from 'src/app/services/card.service';
 import { NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { CreditCardValidators, CreditCard } from 'angular-cc-library';
+import { defer } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-card-form',
@@ -15,6 +18,9 @@ export class AddCardFormComponent {
   card: Card = new Card();
   @Output() cardCreated = new EventEmitter<Card>();
   cardForm: FormGroup;
+
+  public type$ = defer(() => this.cardForm.get('accountNumber')?.valueChanges ?? [])
+  .pipe(map((num: string) => CreditCard.cardType(num)));
   constructor(
     private cardService: CardService,
     private fb: FormBuilder,
@@ -24,7 +30,7 @@ export class AddCardFormComponent {
     ) {
       this.cardForm = this.fb.group(
         {
-          accountNumber: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16), Validators.pattern('[0-9]{16}')]],
+          accountNumber: ['', [Validators.required, CreditCardValidators.validateCCNumber]],
           name: ['', Validators.required],
           expiryDate: ['', Validators.required],
           cvv: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3), Validators.pattern('[0-9]{3}')]]
@@ -45,12 +51,19 @@ export class AddCardFormComponent {
       },
       error => {
         console.error('Failed to add card:', error);
+        alert(`Failed to add card: ${error['error']['message']}`)
       }
     );
   }
 
   goBack() {
     this.location.back();
+  }
+
+  public goToNextField(controlName: string, nextField: HTMLInputElement) {
+    if (this.cardForm.get(controlName)?.valid) {
+      nextField.focus();
+    }
   }
 
   resetAccountNumber() {

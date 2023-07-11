@@ -23,4 +23,29 @@
     <app-card [card]="card" (cardDeleted)="onCardDeleted($event)"></app-card>
   </div>
   
-
+  <div class="appBottomMenu">
+    <a href="index.html" class="item">
+        <div class="col">
+            <i class="pi pi-chart-pie"></i>
+            <strong>Overview</strong>
+        </div>
+    </a>
+    <a href="app-pages.html" class="item">
+        <div class="col">
+            <i class="pi pi-book"></i>
+            <strong>Pages</strong>
+        </div>
+    </a>
+    <a routerLinkActive="active" routerLink="/app/cards" class="item">
+        <div class="col">
+            <i class="pi pi-credit-card"></i>
+            <strong>My Cards</strong>
+        </div>
+    </a>
+    <a href="app-settings.html" class="item">
+        <div class="col">
+            <i class="pi pi-cog"></i>
+            <strong>Settings</strong>
+        </div>
+    </a>
+</div>
