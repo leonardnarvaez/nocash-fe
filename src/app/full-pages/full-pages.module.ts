@@ -20,6 +20,7 @@ import { CashInComponent } from './cash-in/cash-in.component';
 import { CashInFormComponent } from './cash-in-form/cash-in-form.component';
 import { CashOutComponent } from './cash-out/cash-out.component';
 import { CashOutFormComponent } from './cash-out-form/cash-out-form.component';
+import { PinResetComponent } from './pin-reset/pin-reset.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { CashOutFormComponent } from './cash-out-form/cash-out-form.component';
     CashInFormComponent,
     CashOutComponent,
     CashOutFormComponent,
+    PinResetComponent
   ],
   imports: [
     CommonModule,

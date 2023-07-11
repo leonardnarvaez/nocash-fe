@@ -66,7 +66,7 @@ export class CardComponent implements OnInit{
 
 @Component({
   selector: 'app-confirm-dialog',
-  templateUrl: 'dialog-animations-example-dialog.html',
+  templateUrl: 'delete-card-confirmation-dialog.html',
 })
 export class ConfirmDialogComponent {
   constructor(
