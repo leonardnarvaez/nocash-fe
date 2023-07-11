@@ -18,6 +18,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthenticationHistoryModule } from './authentication-history/authentication-history.module';
 import { CashInComponent } from './cash-in/cash-in.component';
 import { CashInFormComponent } from './cash-in-form/cash-in-form.component';
+import { CashOutComponent } from './cash-out/cash-out.component';
+import { CashOutFormComponent } from './cash-out-form/cash-out-form.component';
 import { PinResetComponent } from './pin-reset/pin-reset.component';
 import { BillPaymentFormComponent } from './bill-payment-form/bill-payment-form.component';
 
@@ -37,6 +39,8 @@ import { BillPaymentFormComponent } from './bill-payment-form/bill-payment-form.
     AddCardFormComponent,
     CashInComponent,
     CashInFormComponent,
+    CashOutComponent,
+    CashOutFormComponent,
     PinResetComponent,
     BillPaymentFormComponent,
   ],
