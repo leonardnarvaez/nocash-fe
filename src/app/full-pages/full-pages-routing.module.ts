@@ -8,6 +8,7 @@ import { CardListComponent } from './card-list/card-list.component';
 import { AddCardFormComponent } from './add-card-form/add-card-form.component';
 import { CashInComponent } from './cash-in/cash-in.component';
 import { CashInFormComponent } from './cash-in-form/cash-in-form.component';
+import { CashOutComponent } from './cash-out/cash-out.component';
 const routes: Routes = [
   {
     path: "",
@@ -58,7 +59,6 @@ const routes: Routes = [
         data: {
           title: "Top Up"
         },
-        
       },
       {
         path: "top-up-form/:cardId",
@@ -66,7 +66,13 @@ const routes: Routes = [
         data: {
           title: "Top Up Form"
         },
-        
+      },
+      {
+        path: "cash-out",
+        component: CashOutComponent,
+        data: {
+          title: "Cash Out"
+        },
       },
       {
         canActivate: [AuthGuard],
