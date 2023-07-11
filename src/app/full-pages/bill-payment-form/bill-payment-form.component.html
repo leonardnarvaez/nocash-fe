@@ -40,6 +40,9 @@
                     placeholder="Enter amount."
                     required
                   />
+                  <div class="text-danger" *ngIf="billPaymentForm.controls['amount'].errors?.['negative']">
+                    Amount cannot be negative.
+                  </div>
                 </div>
               </div>
             <!-- Amount -->
