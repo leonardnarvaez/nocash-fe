@@ -35,6 +35,8 @@ import { PinResetComponent } from './pin-reset/pin-reset.component';
     CardListComponent,
     AddCardFormComponent,
     CashInComponent,
+    CashInFormComponent,
+    PinResetComponent
   ],
   imports: [
     CommonModule,
