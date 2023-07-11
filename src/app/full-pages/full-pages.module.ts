@@ -19,6 +19,7 @@ import { AuthenticationHistoryModule } from './authentication-history/authentica
 import { CashInComponent } from './cash-in/cash-in.component';
 import { CashInFormComponent } from './cash-in-form/cash-in-form.component';
 import { CashOutComponent } from './cash-out/cash-out.component';
+import { CashOutFormComponent } from './cash-out-form/cash-out-form.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { CashOutComponent } from './cash-out/cash-out.component';
     CashInComponent,
     CashInFormComponent,
     CashOutComponent,
+    CashOutFormComponent,
   ],
   imports: [
     CommonModule,
