@@ -49,7 +49,14 @@ export class LoginComponent implements OnInit{
 
     this.authService.login(this.loginForm.value.mobileNumber, this.loginForm.value.pin)
     .pipe(
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => {
+        console.info(this.loginForm.value);
+        
+        // when an error occurs clear the pin
+        this.loginForm.get('pin')?.reset();
+        console.info(this.loginForm.value);
+        return this.handleError(error)
+      })
     )
     .subscribe((user: User) => {
       this.router.navigateByUrl(this.returnUrl);

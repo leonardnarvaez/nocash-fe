@@ -9,13 +9,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { RequestAccountVerificationComponent } from './request-account-verification/request-account-verification.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    RequestAccountVerificationComponent
   ],
   imports: [
     CommonModule,

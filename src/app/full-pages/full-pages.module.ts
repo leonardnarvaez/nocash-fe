@@ -18,6 +18,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthenticationHistoryModule } from './authentication-history/authentication-history.module';
 import { CashInComponent } from './cash-in/cash-in.component';
 import { CashInFormComponent } from './cash-in-form/cash-in-form.component';
+import { PinResetComponent } from './pin-reset/pin-reset.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,6 @@ import { CashInFormComponent } from './cash-in-form/cash-in-form.component';
     CardListComponent,
     AddCardFormComponent,
     CashInComponent,
-    CashInFormComponent,
   ],
   imports: [
     CommonModule,
