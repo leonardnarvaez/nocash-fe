@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from "../shared/auth-guard.service";
 import { HeaderComponent } from './header/header.component'
 import { HomeComponent } from './home/home.component';
 import { MerchantListComponent } from './merchant-list/merchant-list.component';
@@ -10,6 +9,7 @@ import { CashInComponent } from './cash-in/cash-in.component';
 import { CashInFormComponent } from './cash-in-form/cash-in-form.component';
 import { CashOutComponent } from './cash-out/cash-out.component';
 import { PinResetComponent } from './pin-reset/pin-reset.component';
+import { BillPaymentFormComponent } from './bill-payment-form/bill-payment-form.component';
 import { CashOutFormComponent } from './cash-out-form/cash-out-form.component';
 const routes: Routes = [
   {
@@ -78,6 +78,38 @@ const routes: Routes = [
         data: {
           title: "Cash Out Form"
         },
+      },
+      {
+        path: "merchants/:merchantId",
+        component: BillPaymentFormComponent,
+        data: {
+          title: "Bill Payment Form"
+        },
+        
+      },
+      {
+        path: "merchants/:merchantId",
+        component: BillPaymentFormComponent,
+        data: {
+          title: "Bill Payment Form"
+        },
+        
+      },
+      {
+        path: "merchants/:merchantId",
+        component: BillPaymentFormComponent,
+        data: {
+          title: "Bill Payment Form"
+        },
+      
+      },
+      {
+        path: "merchants/:merchantId",
+        component: BillPaymentFormComponent,
+        data: {
+          title: "Bill Payment Form"
+        },
+        
       },
       {
         path: "authentication-history",

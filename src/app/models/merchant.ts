@@ -4,5 +4,6 @@ export class Merchant {
         public name: string,
         public imagePath: string,
         public createdAt: Date,
+        public accountNumber: string
     ){}
 }
