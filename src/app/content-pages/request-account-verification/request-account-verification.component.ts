@@ -1,26 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { AuthService } from 'src/app/services/auth.service';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from 'src/app/environments/environment';
 import { catchError, throwError } from 'rxjs';
+import { environment } from 'src/app/environments/environment';
+import { AuthService } from 'src/app/services/auth.service';
+import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-forgot-password',
-  templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.css']
+  selector: 'app-request-account-verification',
+  templateUrl: './request-account-verification.component.html',
+  styleUrls: ['./request-account-verification.component.css']
 })
-export class ForgotPasswordComponent implements OnInit {
-  requestPasswordResetForm: FormGroup;
-  pinResetForm: FormGroup;
-  verificationCodeForm: FormGroup;
+export class RequestAccountVerificationComponent {
+  emailForm: FormGroup;
+  codeForm: FormGroup;
   currentPage: string;
-  reactivationRequestUrl = environment.API_HOST + '/authentication/request-account-reactivation';
-  reactivationUrl = environment.API_HOST + '/authentication/reactivate-account';
+  accountVerificationRequestUrl = environment.API_HOST + '/authentication/request-email-verification';
+  reactivationUrl = environment.API_HOST + '/authentication/verify-email';
   isCodeRequestSuccess: boolean = false;
-  isReactivationSuccess: boolean = false;
+  isAccountVerificationSuccess: boolean = false;
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -28,18 +27,12 @@ export class ForgotPasswordComponent implements OnInit {
     private location: Location,
     private http: HttpClient
   ){
-    this.requestPasswordResetForm = formBuilder.group(
+    this.emailForm = formBuilder.group(
       {
         email: ['', [Validators.email, Validators.required]]  
       }
     )
-    this.pinResetForm = formBuilder.group(
-      {
-        newPin: ['', [Validators.required, Validators.min(4)]],
-        confirmPin: ['', [Validators.required, Validators.min(4)]]
-      }
-    )
-    this.verificationCodeForm = formBuilder.group(
+    this.codeForm = formBuilder.group(
       {
         code: ['', Validators.required]
       }
@@ -47,9 +40,6 @@ export class ForgotPasswordComponent implements OnInit {
     this.currentPage = "main";
   }
   
-  get rpr() {
-    return this.requestPasswordResetForm.controls;
-  }
 
   ngOnInit(): void {
     if(this.authService.isAuthenticated()) {
@@ -58,8 +48,8 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
 
-  requestPasswordReset(): void {
-    this.http.post<any>(this.reactivationRequestUrl, this.requestPasswordResetForm.value)
+  requestAccountVerificationCode(): void {
+    this.http.post<any>(this.accountVerificationRequestUrl, this.emailForm.value)
     .pipe(catchError(this.handleError))
     .subscribe(response => {
       alert(response);
@@ -69,22 +59,17 @@ export class ForgotPasswordComponent implements OnInit {
     });
   }
 
-  showPinResetForm(): void {
-    this.currentPage = 'pin-reset-form';
-  }
-
-  resetPin(): void {
-    const email = this.requestPasswordResetForm.value['email'];
-    const code = this.verificationCodeForm.value['code'];
-    const newPIN = this.pinResetForm.value['newPin'];
-    console.log({email, code, newPIN});
-    this.http.post<any>(this.reactivationUrl, {email, code, newPIN})
+  activateAccount(): void {
+    const email = this.emailForm.value['email'];
+    const code = this.codeForm.value['code'];
+    console.log({email, code});
+    this.http.post<any>(this.reactivationUrl, {email, code})
     .pipe(catchError(this.handleError))
     .subscribe(response => {
       alert(response);
       console.info(response);
       this.currentPage = 'success-page';
-      this.isReactivationSuccess = true;
+      this.isAccountVerificationSuccess = true;
     });
   }
 
@@ -93,8 +78,6 @@ export class ForgotPasswordComponent implements OnInit {
       this.location.back();
     } else if(this.currentPage === 'code-form' && !this.isCodeRequestSuccess) {
       this.currentPage = 'main'
-    } else if(this.currentPage === 'pin-reset-form') {
-      this.currentPage = 'code-form';
     } else if(this.currentPage === 'success-page') {
       this.router.navigateByUrl('/login');
     }

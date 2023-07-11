@@ -7,6 +7,7 @@ import { MerchantListComponent } from './merchant-list/merchant-list.component';
 import { CardListComponent } from './card-list/card-list.component';
 import { AddCardFormComponent } from './add-card-form/add-card-form.component';
 import { CashInComponent } from './cash-in/cash-in.component';
+import { PinResetComponent } from './pin-reset/pin-reset.component';
 const routes: Routes = [
   {
     path: "",
@@ -63,6 +64,10 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         path: "authentication-history",
         loadChildren: () => import('./authentication-history/authentication-history.module').then(m => m.AuthenticationHistoryModule)
+      },
+      {
+        path: 'pin-reset',
+        component: PinResetComponent
       }
     ]
     }

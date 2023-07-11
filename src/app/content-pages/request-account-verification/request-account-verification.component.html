@@ -14,12 +14,11 @@
   
     <div id="appCapsule">
       <div class="section mt-2 text-center">
-        <h1>Account Reactivation</h1>
-        <h4>Recover your NoCash Account</h4>
-        <h5>Account must be locked to request a reactivation</h5>
+        <h1>Account Activation</h1>
+        <h4>Actrivate your NoCash Account</h4>
       </div>
       <div class="section mb-5 p-2">
-        <form [formGroup]="requestPasswordResetForm" (ngSubmit)="requestPasswordReset()" *ngIf="currentPage == 'main'">
+        <form [formGroup]="emailForm" (ngSubmit)="requestAccountVerificationCode()" *ngIf="currentPage == 'main'">
           <div class="card">
             <div class="card-body">
               
@@ -42,7 +41,7 @@
   
               <div class="form-button-group transparent">
                 <button class="btn btn-primary btn-block btn-lg" type="submit">
-                  Request Reactivation
+                  Request Activation
                 </button>
               </div>
 
@@ -50,7 +49,7 @@
           </div>
         </form>
 
-        <form [formGroup]="verificationCodeForm" (ngSubmit)="showPinResetForm()" *ngIf="currentPage == 'code-form'">
+        <form [formGroup]="codeForm" (ngSubmit)="activateAccount()" *ngIf="currentPage == 'code-form'">
           <div class="card">
             <div class="card-body">
               
@@ -71,11 +70,11 @@
                 {{rpr['email'].errors | json}} -->
               </div>
 
-              <p>if you didnt receive the OTP, you can <a (click)="requestPasswordReset()">retry here</a></p>
+              <p>if you didnt receive the OTP, you can <a (click)="requestAccountVerificationCode()">retry here</a></p>
   
               <div class="form-button-group transparent">
                 <button class="btn btn-primary btn-block btn-lg" type="submit">
-                  New Pin
+                  Activate Account
                 </button>
               </div>
 
@@ -83,47 +82,8 @@
           </div>
         </form>
 
-        <form [formGroup]="pinResetForm" (ngSubmit)="resetPin()" *ngIf="currentPage == 'pin-reset-form'">
-            <div class="card">
-              <div class="card-body">
-  
-                <div class="form-group basic">
-                    <div class="input-wrapper">
-                    <label>PIN</label>
-                    <input
-                        type="password"
-                        formControlName="newPin"
-                        class="form-control"
-                        placeholder="Your new PIN"
-                    />
-                    </div>
-                </div>
-
-                <div class="form-group basic">
-                    <div class="input-wrapper">
-                    <label>Confirm PIN</label>
-                    <input
-                        type="password"
-                        formControlName="confirmPin"
-                        class="form-control"
-                        placeholder="Please Retype your pin"
-                    />
-                    </div>
-                </div>
-  
-    
-                <div class="form-button-group transparent">
-                  <button class="btn btn-primary btn-block btn-lg" type="submit">
-                    Reset Pin
-                  </button>
-                </div>
-  
-              </div>
-            </div>
-          </form>
-
-          <div *ngIf="currentPage == 'success-page'">
-            <h2>Your account has been reactivated.</h2>
+        <div *ngIf="currentPage == 'success-page'">
+            <h2>Your account has been activated.</h2>
           </div>
 
       </div>

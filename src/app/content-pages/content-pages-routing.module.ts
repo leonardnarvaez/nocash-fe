@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { RequestAccountVerificationComponent } from './request-account-verification/request-account-verification.component';
 const routes: Routes = [
   {
     path: '',
@@ -33,6 +34,13 @@ const routes: Routes = [
         component: ForgotPasswordComponent,
         data: {
           title: 'forgot password'
+        }
+      },
+      {
+        path: 'verify-account',
+        component: RequestAccountVerificationComponent,
+        data: {
+          title: 'account verification'
         }
       }
     ]
