@@ -78,7 +78,7 @@ export class CashInFormComponent {
     else 
     {
       console.warn(error);
-      alert("Invalid details, please enter your correct PIN");
+      alert(error.error.message);
     }
     return throwError(() => new Error(''))
   }
