@@ -21,7 +21,6 @@ const routes: Routes = [
         data: {
           title: "Dashboard",
         },
-        canActivate: [AuthGuard],
       },
       {
         path: "home",
@@ -29,7 +28,6 @@ const routes: Routes = [
         data: {
           title: "Home",
         },
-        canActivate: [AuthGuard],
       },
       {
         path: "merchants",
@@ -37,7 +35,6 @@ const routes: Routes = [
         data: {
           title: "Merchants",
         },
-        canActivate: [AuthGuard],
       },
       {
         path: "cards",
@@ -45,7 +42,6 @@ const routes: Routes = [
         data: {
           title: "Cards"
         },
-        canActivate: [AuthGuard]
       },
       {
         path: "create",
@@ -84,7 +80,6 @@ const routes: Routes = [
         },
       },
       {
-        canActivate: [AuthGuard],
         path: "authentication-history",
         loadChildren: () => import('./authentication-history/authentication-history.module').then(m => m.AuthenticationHistoryModule)
       },
