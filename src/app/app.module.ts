@@ -14,6 +14,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ErrorHandlerInterceptorService } from './services/error-handler-interceptor.service';
+import { CreditCardDirectivesModule } from 'angular-cc-library';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ErrorHandlerInterceptorService } from './services/error-handler-interce
     FlexLayoutModule,
     FormsModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    CreditCardDirectivesModule
   ],
   providers: [
     AuthService,
