@@ -7,6 +7,7 @@ import { MerchantListComponent } from './merchant-list/merchant-list.component';
 import { CardListComponent } from './card-list/card-list.component';
 import { AddCardFormComponent } from './add-card-form/add-card-form.component';
 import { CashInComponent } from './cash-in/cash-in.component';
+import { CashInFormComponent } from './cash-in-form/cash-in-form.component';
 import { PinResetComponent } from './pin-reset/pin-reset.component';
 const routes: Routes = [
   {
@@ -57,6 +58,14 @@ const routes: Routes = [
         component: CashInComponent,
         data: {
           title: "Top Up"
+        },
+        
+      },
+      {
+        path: "top-up-form/:cardId",
+        component: CashInFormComponent,
+        data: {
+          title: "Top Up Form"
         },
         
       },

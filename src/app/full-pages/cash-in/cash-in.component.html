@@ -9,5 +9,5 @@
   </div>
   
     <div class="transactions" *ngFor="let card of cards">
-      <app-card [card]="card" (click)="test(card.id)"></app-card>
+      <app-card [card]="card" [routerLink]="['/app/top-up-form', card.id]"></app-card>
     </div>
