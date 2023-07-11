@@ -7,13 +7,13 @@ import { MessageService } from 'src/app/services/message.service';
 import { environment } from 'src/app/environments/environment';
 
 @Component({
-  selector: 'app-cash-in-form',
-  templateUrl: './cash-in-form.component.html',
-  styleUrls: ['./cash-in-form.component.css']
+  selector: 'app-cash-out-form',
+  templateUrl: './cash-out-form.component.html',
+  styleUrls: ['./cash-out-form.component.css']
 })
-export class CashInFormComponent {
-  topUpForm: FormGroup;
-  urlEndPoint = `${environment.API_HOST}/api/card-transaction/cash-in`
+export class CashOutFormComponent {
+  cashOutForm: FormGroup;
+  urlEndPoint = `${environment.API_HOST}/api/card-transaction/cash-out`
   cardId!: String;
   constructor(
     private formBuilder: FormBuilder,
@@ -22,8 +22,8 @@ export class CashInFormComponent {
     private router: Router,
     private route: ActivatedRoute,
     private location: Location
-  ) {
-    this.topUpForm = this.formBuilder.group (
+  ){
+    this.cashOutForm = this.formBuilder.group (
       {
         balance: ['', [Validators.required]],
         pin: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
@@ -35,12 +35,12 @@ export class CashInFormComponent {
   }
 
   sendBalance(): void {
-    if (this.topUpForm.invalid) {
+    if (this.cashOutForm.invalid) {
       return;
     }
 
     const payload = {
-      amount: this.topUpForm.get('balance')?.value,
+      amount: this.cashOutForm.get('balance')?.value,
       cardId: this.cardId
     }
     this.http.post<HttpResponse<any>>(this.urlEndPoint, payload).subscribe(
@@ -48,12 +48,11 @@ export class CashInFormComponent {
         console.log(response)
       }
     )
-    alert('Top Up Complete!')
+    alert('Cash Out Complete!')
     this.router.navigateByUrl('/app/home')
   }
 
   goBack(): void {
     this.location.back();
   }
-
 }

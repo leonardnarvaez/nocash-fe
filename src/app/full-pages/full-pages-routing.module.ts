@@ -10,6 +10,7 @@ import { CashInComponent } from './cash-in/cash-in.component';
 import { CashInFormComponent } from './cash-in-form/cash-in-form.component';
 import { CashOutComponent } from './cash-out/cash-out.component';
 import { PinResetComponent } from './pin-reset/pin-reset.component';
+import { CashOutFormComponent } from './cash-out-form/cash-out-form.component';
 const routes: Routes = [
   {
     path: "",
@@ -73,6 +74,13 @@ const routes: Routes = [
         component: CashOutComponent,
         data: {
           title: "Cash Out"
+        },
+      },
+      {
+        path: "cash-out-form/:cardId",
+        component: CashOutFormComponent,
+        data: {
+          title: "Cash Out Form"
         },
       },
       {
