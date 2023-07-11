@@ -10,5 +10,5 @@
 
 </div>
 <div class="transactions" *ngFor="let merchant of merchants">
-   <app-merchant [merchant]="merchant"></app-merchant>
+   <app-merchant [merchant]="merchant" [routerLink]="['/app/merchants', merchant.merchantId]"></app-merchant>
 </div>

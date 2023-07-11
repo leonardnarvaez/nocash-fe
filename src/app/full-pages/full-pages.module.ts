@@ -19,6 +19,7 @@ import { AuthenticationHistoryModule } from './authentication-history/authentica
 import { CashInComponent } from './cash-in/cash-in.component';
 import { CashInFormComponent } from './cash-in-form/cash-in-form.component';
 import { PinResetComponent } from './pin-reset/pin-reset.component';
+import { BillPaymentFormComponent } from './bill-payment-form/bill-payment-form.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { PinResetComponent } from './pin-reset/pin-reset.component';
     AddCardFormComponent,
     CashInComponent,
     CashInFormComponent,
-    PinResetComponent
+    PinResetComponent,
+    BillPaymentFormComponent,
   ],
   imports: [
     CommonModule,
