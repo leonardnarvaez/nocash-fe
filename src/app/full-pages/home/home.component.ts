@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'src/app/services/message.service';
+import { Subscription } from "rxjs";
+import { environment } from 'src/app/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +11,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit{
   walletBalance: number;
-  urlEndPoint = "http://localhost:8080/api/card-transaction/balance"
+  urlEndPoint = `${environment.API_HOST}/api/card-transaction/balance`
+  messageSubscription!: Subscription;
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private messageService: MessageService
   ) {
     this.walletBalance = 0;
+
   }
   ngOnInit(): void {
     this.http.get<number>(this.urlEndPoint)
@@ -20,6 +26,8 @@ export class HomeComponent implements OnInit{
       this.walletBalance = balance;
     });
   }
+
+
 
   
 }
