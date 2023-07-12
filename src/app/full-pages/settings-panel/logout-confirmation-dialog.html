@@ -1,0 +1,24 @@
+<div class="modal fade dialogbox show" id="DialogIconedButton" data-bs-backdrop="static" tabindex="-1" style="display: block;" aria-modal="true" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" role="document">
+        <div class="modal-header">
+          <div class="modal-title">Confirmation</div>
+        </div>
+        <h5 class="modal-body">{{ data.message }}</h5>
+        <div class="modal-footer">
+          <div class="btn-list">
+    
+            <a class="btn btn-text-primary btn-block"  (click)="dialogRef.close(true)" data-bs-dismiss="modal">
+              <i class="pi pi-check"></i>
+              Yes
+            </a>
+            <a class="btn btn-text-danger btn-block"  (click)="dialogRef.close(false)" data-bs-dismiss="modal">
+              <i class="pi pi-times"></i>
+              Cancel
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    
