@@ -2,9 +2,7 @@
   <div style="padding-bottom: 60px;">
   <div class="appHeader">
     <div class="left">
-      <a href="#" class="headerButton goBack">
-        <i class="pi pi pi-angle-left"></i>
-      </a>
+        <i class="headerButton pi pi pi-arrow-left" (click)="goBack()"></i>
     </div>
     <div class="pageTitle">My Cards</div>
     <div class="right">
@@ -24,7 +22,7 @@
   </div>
   
   <div class="appBottomMenu">
-    <a href="index.html" class="item">
+    <a routerLinkActive="active" routerLink="/app/home" class="item">
         <div class="col">
             <i class="pi pi-chart-pie"></i>
             <strong>Overview</strong>

@@ -6,7 +6,6 @@ import { User } from 'src/app/models/user';
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -26,8 +25,8 @@ export class LoginComponent implements OnInit{
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group(
       {
-        mobileNumber: [""],
-        pin: [""],
+        mobileNumber: ["", [Validators. required, Validators.pattern('[0-9]{11}')]],
+        pin: ["", [Validators.required, Validators.pattern('[0-9]{4}'), Validators.minLength(4), Validators.maxLength(4)]],
 
       },
     )
@@ -75,6 +74,6 @@ export class LoginComponent implements OnInit{
       console.warn(error);
       alert(error.error.message);
     }
-    return throwError(() => new Error('HAHAHAHAHA'))
+    return throwError(() => new Error(''))
   }
 }

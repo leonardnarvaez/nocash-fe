@@ -24,7 +24,42 @@
                   formControlName="mobileNumber"
                   class="form-control"
                   placeholder="Your mobile number"
+                  required
+                  minlength="11"
+                  maxlength="11"
                 />
+                <div
+            *ngIf="
+              loginForm.controls['mobileNumber'].invalid &&
+              (loginForm.controls['mobileNumber'].dirty ||
+                loginForm.controls['mobileNumber'].touched)
+            "
+          >
+            <div
+              class="text-danger"
+              *ngIf="loginForm.controls['mobileNumber'].errors?.['required']"
+            >
+              Mobile Number is required.
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="loginForm.controls['mobileNumber'].errors?.['minlength']"
+            >
+            Mobile Number must be 11 digits long.
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="loginForm.controls['mobileNumber'].errors?.['maxlength']"
+            >
+            Mobile Number must be 11 digits long.
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="loginForm.controls['mobileNumber'].errors?.['pattern']"
+            >
+            Mobile Number must be a 11 digit numeric combination.
+            </div>
+          </div>
                 <i class="clear-input"> </i>
               </div>
             </div>
@@ -37,7 +72,42 @@
                   formControlName="pin"
                   class="form-control"
                   placeholder="Your PIN"
+                  required
+                  minlength="4"
+                  maxlength="4"
                 />
+                <div
+            *ngIf="
+              loginForm.controls['pin'].invalid &&
+              (loginForm.controls['pin'].dirty ||
+                loginForm.controls['pin'].touched)
+            "
+          >
+            <div
+              class="text-danger"
+              *ngIf="loginForm.controls['pin'].errors?.['required']"
+            >
+              PIN is required.
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="loginForm.controls['pin'].errors?.['minlength']"
+            >
+            PIN must be 4 digits long.
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="loginForm.controls['pin'].errors?.['maxlength']"
+            >
+            PIN must be 4 digits long.
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="loginForm.controls['pin'].errors?.['pattern']"
+            >
+            PIN must be a 4 digit numeric combination.
+            </div>
+          </div>
                 <i class="clear-input"> </i>
               </div>
             </div>
@@ -56,7 +126,7 @@
         </div>
 
         <div class="form-button-group transparent">
-          <button class="btn btn-primary btn-block btn-lg" type="submit">
+          <button class="btn btn-primary btn-block btn-lg" type="submit" [disabled]="!loginForm.valid">
             Log in
           </button>
         </div>

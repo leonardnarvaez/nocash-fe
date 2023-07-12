@@ -35,8 +35,8 @@ export class ForgotPasswordComponent implements OnInit {
     )
     this.pinResetForm = formBuilder.group(
       {
-        newPin: ['', [Validators.required, Validators.min(4)]],
-        confirmPin: ['', [Validators.required, Validators.min(4)]]
+        newPin: ['', [Validators.required, Validators.pattern('[0-9]{4}'), Validators.minLength(4), Validators.maxLength(4)]],
+        confirmPin: ['', [Validators.required, Validators.pattern('[0-9]{4}'), Validators.minLength(4), Validators.maxLength(4)]]
       }
     )
     this.verificationCodeForm = formBuilder.group(
@@ -62,7 +62,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.http.post<any>(this.reactivationRequestUrl, this.requestPasswordResetForm.value)
     .pipe(catchError(this.handleError))
     .subscribe(response => {
-      alert(response);
+      alert(response.message);
       console.info(response);
       this.currentPage = 'code-form';
       this.isCodeRequestSuccess = true;
@@ -81,7 +81,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.http.post<any>(this.reactivationUrl, {email, code, newPIN})
     .pipe(catchError(this.handleError))
     .subscribe(response => {
-      alert(response);
+      alert(response.message);
       console.info(response);
       this.currentPage = 'success-page';
       this.isReactivationSuccess = true;
@@ -117,6 +117,6 @@ export class ForgotPasswordComponent implements OnInit {
     }
     // to prevent a bug where if the logout request failed 
     // this.stateService.removeCurrentUser();
-    return throwError(() => new Error('HAHAHAHAHA'))
+    return throwError(() => new Error(''))
   }
 }

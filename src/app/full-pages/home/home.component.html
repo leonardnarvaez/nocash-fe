@@ -2,22 +2,12 @@
     <!-- App Header -->
     <div class="appHeader bg-primary text-light">
         <div class="left">
-            <a href="#" class="headerButton" data-bs-toggle="modal" data-bs-target="#sidebarPanel">
+            <a routerLinkActive="active" routerLink="/app/home" class="headerButton" data-bs-toggle="modal" data-bs-target="#sidebarPanel">
                <i class="pi pi-bars"></i>
             </a>
         </div>
         <div class="pageTitle">
             <img src="../../assets/img/logo.png" alt="logo" class="logo">
-        </div>
-        <div class="right">
-            <a href="app-notifications.html" class="headerButton">
-                <i class="pi pi-bell"></i>
-                <span class="badge badge-danger">4</span>
-            </a>
-            <a href="app-settings.html" class="headerButton">
-                <img src="../../assets/img/sample/avatar/avatar1.jpg" alt="image" class="imaged w32">
-                <span class="badge badge-danger">6</span>
-            </a>
         </div>
     </div>
     <!-- * App Header -->
@@ -371,7 +361,7 @@
 
     <!-- App Bottom Menu -->
     <div class="appBottomMenu">
-        <a href="index.html" class="item active">
+        <a routerLinkActive="active" routerLink="/app/home" class="item active">
             <div class="col">
                 <i class="pi pi-chart-pie"></i>
                 <strong>Overview</strong>

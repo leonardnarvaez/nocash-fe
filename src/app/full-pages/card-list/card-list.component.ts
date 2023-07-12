@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CardService } from 'src/app/services/card.service';
 import { Card } from 'src/app/models/card';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-card-list',
@@ -9,7 +10,7 @@ import { Card } from 'src/app/models/card';
 })
 export class CardListComponent implements OnInit{
   cards: Card[] = [];
-  constructor(private cardService: CardService){
+  constructor(private cardService: CardService, private location: Location){
 
   }
   @Input() updatedCards: Card[] = [];
@@ -34,6 +35,10 @@ export class CardListComponent implements OnInit{
 
   onCardDeleted(deletedCard: Card) {
     this.cards = this.cards.filter(card => card.id !== deletedCard.id);
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }
