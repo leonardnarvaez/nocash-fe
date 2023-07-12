@@ -11,6 +11,7 @@ import { CashOutComponent } from './cash-out/cash-out.component';
 import { PinResetComponent } from './pin-reset/pin-reset.component';
 import { BillPaymentFormComponent } from './bill-payment-form/bill-payment-form.component';
 import { CashOutFormComponent } from './cash-out-form/cash-out-form.component';
+import { SettingsPanelComponent } from './settings-panel/settings-panel.component';
 const routes: Routes = [
   {
     path: "",
@@ -110,6 +111,13 @@ const routes: Routes = [
           title: "Bill Payment Form"
         },
         
+      },
+      {
+        path: "settings",
+        component: SettingsPanelComponent,
+        data: {
+          title: "Settings",
+        },
       },
       {
         path: "authentication-history",
