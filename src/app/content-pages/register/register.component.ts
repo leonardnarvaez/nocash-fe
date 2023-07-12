@@ -6,6 +6,7 @@ import { User } from 'src/app/models/user';
 import { HttpErrorResponse } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 import { AuthStateService } from 'src/app/shared/auth-state.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -21,15 +22,16 @@ export class RegisterComponent implements OnInit{
     private authService: AuthService, 
     private router: Router, 
     private route: ActivatedRoute,
-    private stateService: AuthStateService) {
+    private stateService: AuthStateService,
+    private location: Location) {
   }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group(
       {
-        emailAddress: [""],
-        mobileNumber: [""],
-        pin: [""],
+        emailAddress: ["", [Validators.required, Validators.pattern('^(?:(?!.*?[.]{2})[a-zA-Z0-9](?:[a-zA-Z0-9.+!%-]{1,64}|)|\"[a-zA-Z0-9.+!% -]{1,64}\")@[a-zA-Z0-9][a-zA-Z0-9.-]+(.[a-z]{2,}|.[0-9]{1,})$')]],
+        mobileNumber: ["", [Validators. required, Validators.pattern('[0-9]{11}')]],
+        pin: ["", [Validators.required, Validators.pattern('[0-9]{4}'), Validators.minLength(4), Validators.maxLength(4)]],
       },
     )
 
@@ -67,6 +69,10 @@ export class RegisterComponent implements OnInit{
     }
     // to prevent a bug where if the logout request failed 
     // this.stateService.removeCurrentUser();
-    return throwError(() => new Error('HAHAHAHAHA'))
+    return throwError(() => new Error(''))
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
