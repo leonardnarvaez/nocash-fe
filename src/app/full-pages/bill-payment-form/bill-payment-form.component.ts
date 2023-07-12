@@ -5,6 +5,8 @@ import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/htt
 import { environment } from 'src/app/environments/environment';
 import { Location } from '@angular/common';
 import { catchError, throwError } from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
 
 
 @Component({
@@ -17,13 +19,16 @@ export class BillPaymentFormComponent {
   urlEndPoint = `${environment.API_HOST}/api/merchant/payment`
   merchantId!: String;
   accountNumber!: String;
+  dialogRef!: MatDialogRef<SuccessDialogComponent>;
+  // successDialog = 
 
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private dialog: MatDialog
   ){
     this.billPaymentForm = this.formBuilder.group(
       {
@@ -38,10 +43,15 @@ export class BillPaymentFormComponent {
   }
   
   payBill(): void {
+    try {
+      this.dialogRef.close();
+    } catch(e) {
+      console.log(e);
+      
+    }
     if (this.billPaymentForm.invalid) {
       return;
     }
-
     const payload = {
       amount: this.billPaymentForm.get('amount')?.value,
       merchantId: this.merchantId,
@@ -53,9 +63,20 @@ export class BillPaymentFormComponent {
     ).subscribe(
       (response: HttpResponse<any>) => {
         console.log(response)
-        this.router.navigateByUrl('/app/home')
+        this.openSuccessDialog();
       }
     )
+  }
+
+  openSuccessDialog(): void {
+    const dialogRef = this.dialog.open(SuccessDialogComponent, {
+      disableClose: false,
+      autoFocus: false
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
   
   goBack(): void {
