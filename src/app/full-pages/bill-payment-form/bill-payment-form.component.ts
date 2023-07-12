@@ -53,7 +53,7 @@ export class BillPaymentFormComponent {
     ).subscribe(
       (response: HttpResponse<any>) => {
         console.log(response)
-        this.router.navigateByUrl('/app/home')
+        this.router.navigateByUrl('/app/success')
       }
     )
   }

@@ -52,8 +52,8 @@ export class CashInFormComponent {
     .subscribe(
       (response: HttpResponse<any>) => {
         console.log(response)
-        alert('Top Up Complete!')
-        this.router.navigateByUrl('/app/home')
+        // alert('Top Up Complete!')
+        this.router.navigateByUrl('/app/success')
       }
     )
   }
@@ -82,5 +82,4 @@ export class CashInFormComponent {
     }
     return throwError(() => new Error(''))
   }
-
 }

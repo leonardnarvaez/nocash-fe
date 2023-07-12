@@ -23,6 +23,7 @@ import { CashOutFormComponent } from './cash-out-form/cash-out-form.component';
 import { PinResetComponent } from './pin-reset/pin-reset.component';
 import { BillPaymentFormComponent } from './bill-payment-form/bill-payment-form.component';
 import { SettingsPanelComponent } from './settings-panel/settings-panel.component';
+import { SuccessBoxComponent } from './success-box/success-box.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { SettingsPanelComponent } from './settings-panel/settings-panel.componen
     PinResetComponent,
     BillPaymentFormComponent,
     SettingsPanelComponent,
+    SuccessBoxComponent,
   ],
   imports: [
     CommonModule,
