@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { environment } from 'src/app/environments/environment';
 import { Location } from '@angular/common';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-
+import { MustMatch } from './must-match-validator';
 @Component({
   selector: 'app-pin-reset',
   templateUrl: './pin-reset.component.html',
@@ -21,13 +21,12 @@ export class PinResetComponent implements OnInit{
     private router: Router
   ) {
     this.pinResetForm = formBuilder.group({
-      oldPin: ['', [Validators.required]],
-      newPin: ['', [Validators.required]],
-      confirmPin: ['', [Validators.required]]
-    });
+      oldPin: ['', [Validators.required, Validators.pattern('[0-9]{4}'), Validators.minLength(4), Validators.maxLength(4)]],
+      newPin: ['', [Validators.required, Validators.pattern('[0-9]{4}'), Validators.minLength(4), Validators.maxLength(4)]],
+      confirmPin: ['', [Validators.required, Validators.pattern('[0-9]{4}'), Validators.minLength(4), Validators.maxLength(4)]]
+    }, { validator: MustMatch("newPin", "confirmPin")});
   }
   ngOnInit(): void {
-    // throw new Error('Method not implemented.');
   }
 
   resetPin(): void {
@@ -59,8 +58,16 @@ export class PinResetComponent implements OnInit{
       console.warn(error);
       alert(error.error.message);
     }
-    // to prevent a bug where if the logout request failed 
-    // this.stateService.removeCurrentUser();
-    return throwError(() => new Error('HAHAHAHAHA'))
+    return throwError(() => new Error(''))
   }
+
+  pinEqualsValidator(control: AbstractControl) {
+    const newPin: string = control.get('newPin')?.value;
+    const confirmPin: string = control.get('confirmPin')?.value;
+    
+    if (newPin !== confirmPin) {
+      return { notEqual: true}
+    }
+    return null;
+  } 
 }

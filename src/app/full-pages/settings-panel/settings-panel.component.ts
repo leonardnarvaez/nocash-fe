@@ -4,6 +4,7 @@ import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/app/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-settings-panel',
@@ -15,7 +16,8 @@ export class SettingsPanelComponent implements OnInit{
   constructor(
     private httpClient: HttpClient,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private location: Location
     ){
     this.base_url = environment.API_HOST;
   }
@@ -33,5 +35,9 @@ export class SettingsPanelComponent implements OnInit{
       this.router.navigateByUrl('/login');
     });
     
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
