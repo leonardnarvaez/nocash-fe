@@ -26,13 +26,13 @@ export class ErrorHandlerInterceptorService implements HttpInterceptor {
         },
         error: error => {
           if(error.status === 403) {
-            alert('[error]: Unauthorized Access')
+            alert('Unauthorized Access')
             this.authService.logout().subscribe(m => {
               console.error(m);
               this.router.navigateByUrl('/login')
             })
           } else if(error.status === 404) {
-            alert('[error]: resource not found');
+            alert('Resource not found');
           }
         }
       })

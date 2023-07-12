@@ -26,6 +26,7 @@ import { SettingsPanelComponent } from './settings-panel/settings-panel.componen
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { SuccessBoxComponent } from './success-box/success-box.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     BillPaymentFormComponent,
     SettingsPanelComponent,
     SuccessDialogComponent,
+    SuccessBoxComponent,
   ],
   imports: [
     CommonModule,

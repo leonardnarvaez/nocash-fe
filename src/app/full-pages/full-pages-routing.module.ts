@@ -12,6 +12,7 @@ import { PinResetComponent } from './pin-reset/pin-reset.component';
 import { BillPaymentFormComponent } from './bill-payment-form/bill-payment-form.component';
 import { CashOutFormComponent } from './cash-out-form/cash-out-form.component';
 import { SettingsPanelComponent } from './settings-panel/settings-panel.component';
+import { SuccessBoxComponent } from './success-box/success-box.component';
 const routes: Routes = [
   {
     path: "",
@@ -126,7 +127,14 @@ const routes: Routes = [
       {
         path: 'pin-reset',
         component: PinResetComponent
-      }
+      },{
+        path: "success",
+        component: SuccessBoxComponent,
+        data: {
+          title: "Success Box"
+        },
+      
+      },
     ]
     }
 ];

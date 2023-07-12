@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { environment } from 'src/app/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-settings-panel',
@@ -18,7 +19,8 @@ export class SettingsPanelComponent implements OnInit{
     private httpClient: HttpClient,
     private authService: AuthService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private location: Location
     ){
     this.base_url = environment.API_HOST;
   }
@@ -61,4 +63,8 @@ export class LogoutConfirmationDialogComponent {
     public dialogRef: MatDialogRef<LogoutConfirmationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
+
+  goBack() {
+    this.location.back();
+  }
 }

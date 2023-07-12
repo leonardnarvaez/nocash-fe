@@ -52,8 +52,8 @@ export class CashOutFormComponent {
     .subscribe(
       (response: HttpResponse<any>) => {
         console.log(response)
-        alert('Cash Out Complete!');
-        this.router.navigateByUrl('/app/home');
+        // alert('Cash Out Complete!');
+        this.router.navigateByUrl('/app/success')
       }
     )
     
