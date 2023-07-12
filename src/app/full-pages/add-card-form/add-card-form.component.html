@@ -25,6 +25,20 @@
                 required
               />
             </div>
+            <div
+              *ngIf="
+                cardForm.controls['name'].invalid &&
+                (cardForm.controls['name'].dirty ||
+                  cardForm.controls['name'].touched)
+              "
+            >
+              <div
+                class="text-danger"
+                *ngIf="cardForm.controls['name'].errors?.['required']"
+              >
+                Please enter a card name
+              </div>
+            </div>
           </div>
           <!-- Card Name -->
 
@@ -63,7 +77,19 @@
                 ></i>
               </div>
 
-              <div class="errors">
+              <div
+                *ngIf="
+                  cardForm.controls['accountNumber'].invalid &&
+                  (cardForm.controls['accountNumber'].dirty ||
+                    cardForm.controls['accountNumber'].touched)
+                "
+              >
+                <div
+                  class="text-danger"
+                  *ngIf="cardForm.controls['accountNumber'].errors?.['required']"
+                >
+                  Card number is required.
+                </div>
                 <div
                   *ngIf="
                     !cardForm.controls['accountNumber'].valid &&
@@ -83,6 +109,7 @@
             <div class="input-wrapper">
               <label class="label" for="cvv">CVV</label>
               <input
+                (input)="goToNextField('cvv', expDate)"
                 class="form-control"
                 #cvv
                 type="text"
@@ -133,46 +160,47 @@
             <div class="input-wrapper">
               <label class="label" for="expiryDate">Expiry Date</label>
               <div class="input-group">
-              <input
-                class="form-control"
-                type="tel"
-                id="cc-exp"
-                formControlName="expiryDate"
-                placeholder="Ex: 06/33"
-                autocomplete="cc-exp"
-                required
-                ccExp
-              />
-            </div>
-            <div *ngIf="
-            cardForm.controls['expiryDate'].invalid &&
-            (cardForm.controls['expiryDate'].dirty ||
-              cardForm.controls['expiryDate'].touched)
-          ">
+                <input
+                  class="form-control"
+                  #expDate
+                  type="tel"
+                  id="cc-exp"
+                  formControlName="expiryDate"
+                  placeholder="Ex: 06/33"
+                  autocomplete="cc-exp"
+                  required
+                  ccExp
+                />
+              </div>
+              <div
+                *ngIf="
+                  cardForm.controls['expiryDate'].invalid &&
+                  (cardForm.controls['expiryDate'].dirty ||
+                    cardForm.controls['expiryDate'].touched)
+                "
+              >
+                <div
+                  class="text-danger"
+                  *ngIf="cardForm.controls['expiryDate'].errors?.['pattern']"
+                >
+                  Invalid date format
+                </div>
+
+                <div
+                  class="text-danger"
+                  *ngIf="cardForm.controls['expiryDate'].errors?.['required']"
+                >
+                  Expiry date is required.
+                </div>
+              </div>
 
               <div
-              class="text-danger"
-              *ngIf="cardForm.controls['expiryDate'].errors?.['pattern']"
-            >
-              Invalid date format
-            </div>
-
-            <div
-            class="text-danger"
-            *ngIf="cardForm.controls['expiryDate'].errors?.['required']"
-          >
-            Expiry date is required.
-          </div>
-
-            </div>
-            
-            <div
-            class="text-danger"
-            *ngIf="cardForm.controls['expiryDate'].errors?.['notExpired'] && cardForm.controls['expiryDate'].invalid &&
-            cardForm.get('expiryDate')?.value" 
-          >
-            Card is expired
-          </div>
+                class="text-danger"
+                *ngIf="cardForm.controls['expiryDate'].errors?.['notExpired'] && cardForm.controls['expiryDate'].invalid &&
+            cardForm.get('expiryDate')?.value"
+              >
+                Card is expired
+              </div>
             </div>
           </div>
 
@@ -193,27 +221,27 @@
 
 <div class="appBottomMenu">
   <a href="index.html" class="item">
-      <div class="col">
-          <i class="pi pi-chart-pie"></i>
-          <strong>Overview</strong>
-      </div>
+    <div class="col">
+      <i class="pi pi-chart-pie"></i>
+      <strong>Overview</strong>
+    </div>
   </a>
   <a href="app-pages.html" class="item">
-      <div class="col">
-          <i class="pi pi-book"></i>
-          <strong>Pages</strong>
-      </div>
+    <div class="col">
+      <i class="pi pi-book"></i>
+      <strong>Pages</strong>
+    </div>
   </a>
   <a routerLinkActive="item" routerLink="/app/cards" class="item">
-      <div class="col">
-          <i class="pi pi-credit-card"></i>
-          <strong>My Cards</strong>
-      </div>
+    <div class="col">
+      <i class="pi pi-credit-card"></i>
+      <strong>My Cards</strong>
+    </div>
   </a>
   <a href="app-settings.html" class="item">
-      <div class="col">
-          <i class="pi pi-cog"></i>
-          <strong>Settings</strong>
-      </div>
+    <div class="col">
+      <i class="pi pi-cog"></i>
+      <strong>Settings</strong>
+    </div>
   </a>
 </div>
