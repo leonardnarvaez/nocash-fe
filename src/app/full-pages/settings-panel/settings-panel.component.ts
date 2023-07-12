@@ -53,6 +53,9 @@ export class SettingsPanelComponent implements OnInit{
   }
   })
 }
+goBack() {
+  this.location.back();
+}
 }
 @Component({
   selector: 'app-logout-confirmation-dialog',
@@ -63,8 +66,4 @@ export class LogoutConfirmationDialogComponent {
     public dialogRef: MatDialogRef<LogoutConfirmationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
-
-  goBack() {
-    this.location.back();
-  }
 }
