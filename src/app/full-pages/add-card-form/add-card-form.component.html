@@ -132,14 +132,47 @@
           <div class="form-group basic">
             <div class="input-wrapper">
               <label class="label" for="expiryDate">Expiry Date</label>
+              <div class="input-group">
               <input
                 class="form-control"
-                type="text"
-                id="expiryDate"
+                type="tel"
+                id="cc-exp"
                 formControlName="expiryDate"
-                placeholder="Ex: 06/21"
+                placeholder="Ex: 06/33"
+                autocomplete="cc-exp"
                 required
+                ccExp
               />
+            </div>
+            <div *ngIf="
+            cardForm.controls['expiryDate'].invalid &&
+            (cardForm.controls['expiryDate'].dirty ||
+              cardForm.controls['expiryDate'].touched)
+          ">
+
+              <div
+              class="text-danger"
+              *ngIf="cardForm.controls['expiryDate'].errors?.['pattern']"
+            >
+              Invalid date format
+            </div>
+
+            <div
+            class="text-danger"
+            *ngIf="cardForm.controls['expiryDate'].errors?.['required']"
+          >
+            Expiry date is required.
+          </div>
+
+            </div>
+            
+            <div
+            class="text-danger"
+            *ngIf="cardForm.controls['expiryDate'].errors?.['notExpired'] && cardForm.controls['expiryDate'].invalid &&
+            cardForm.get('expiryDate')?.value" 
+          >
+            Card is expired
+          </div>
             </div>
           </div>
 

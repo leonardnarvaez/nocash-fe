@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Card } from 'src/app/models/card';
 import { CardService } from 'src/app/services/card.service';
 import { NgZone } from '@angular/core';
@@ -32,7 +32,7 @@ export class AddCardFormComponent {
         {
           accountNumber: ['', [Validators.required, CreditCardValidators.validateCCNumber]],
           name: ['', Validators.required],
-          expiryDate: ['', Validators.required],
+          expiryDate: ['', [CreditCardValidators.validateExpDate, Validators.pattern('^(0[1-9]|1[0-2])\/([0-9]{2})$'), this.expiryDateValidator]],
           cvv: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3), Validators.pattern('[0-9]{3}')]]
         }
       )
@@ -69,5 +69,23 @@ export class AddCardFormComponent {
   resetAccountNumber() {
     this.cardForm.get('accountNumber')?.setValue('');
     this.cardForm.get('accountNumber')?.setErrors(null);
+  }
+
+  expiryDateValidator(control: AbstractControl) {
+    const stringDate: string[] = control.value.split("/")
+    const date = new Date();
+    const monthNow = date.getMonth();
+    const yearNow = parseInt(date.getFullYear().toString().substring(2));
+  
+    //example is 06 or 11
+    const monthInput = parseInt(stringDate[0]);
+
+    const yearInput = parseInt(stringDate[1]);
+
+    //0628 //0724
+    if (!(yearInput > yearNow || (yearInput === yearNow && monthInput > monthNow))){
+      return { notExpired: true}
+    }
+    return null;
   }
 }
