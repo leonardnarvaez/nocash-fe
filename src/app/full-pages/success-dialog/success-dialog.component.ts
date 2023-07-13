@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-success-dialog',
@@ -7,7 +7,9 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./success-dialog.component.css']
 })
 export class SuccessDialogComponent {
-  constructor(public dialog: MatDialog){
-
+  successMessage: string;
+  constructor(public dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any){
+      this.successMessage = data.successMessage;
 }
 }
