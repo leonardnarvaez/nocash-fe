@@ -9,6 +9,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
 import { Merchant } from 'src/app/models/merchant';
 import { MerchantService } from 'src/app/services/merchant.service';
+import { FailDialogComponent } from '../fail-dialog/fail-dialog.component';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class BillPaymentFormComponent implements OnInit{
   urlEndPoint = `${environment.API_HOST}/api/merchant/payment`
   merchantId!: string;
   accountNumber!: String;
-  dialogRef!: MatDialogRef<SuccessDialogComponent>;
+  dialogRef!: MatDialogRef<SuccessDialogComponent, FailDialogComponent>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -98,6 +99,20 @@ export class BillPaymentFormComponent implements OnInit{
     this.location.back();
   }
 
+  openFailDialog(errorMessage: string): void {
+    const dialogRef = this.dialog.open(FailDialogComponent, {
+      disableClose: false,
+      autoFocus: false,
+      data: {
+        errorMessage: errorMessage
+      }
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    })
+  }
+
   positiveBalanceValidator(control: AbstractControl) {
     const amount = control.value;
     if (amount < 0) {
@@ -106,7 +121,7 @@ export class BillPaymentFormComponent implements OnInit{
     return null;
   }
 
-  private handleError(error: HttpErrorResponse) {
+  private handleError = (error: HttpErrorResponse) => {
     if (error.status === 0) 
     {
       console.error('An error occurred:', error.error);
@@ -114,7 +129,7 @@ export class BillPaymentFormComponent implements OnInit{
     else 
     {
       console.warn(error);
-      alert(error.error.message);
+      this.openFailDialog(error.error.message);
     }
     return throwError(() => new Error(''))
   }
