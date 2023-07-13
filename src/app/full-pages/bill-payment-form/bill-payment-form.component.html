@@ -120,6 +120,12 @@
               >
                 PIN must be 4 characters long.
               </div>
+              <div
+                    class="text-danger"
+                    *ngIf="billPaymentForm.controls['pin'].errors?.['pattern']"
+                  >
+                  PIN must be a 4 digit numeric combination.
+                  </div>
             </div>
           </div>
         </div>

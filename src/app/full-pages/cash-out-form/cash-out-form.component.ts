@@ -32,7 +32,7 @@ export class CashOutFormComponent {
     this.cashOutForm = this.formBuilder.group (
       {
         balance: ['', [Validators.required, this.positiveBalanceValidator]],
-        pin: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
+        pin: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('[0-9]{4}')]]
       }
     )
     this.route.params.subscribe(params => {

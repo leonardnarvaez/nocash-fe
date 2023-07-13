@@ -48,15 +48,6 @@
                     minlength="4"
                     maxlength="4"
                   />
-                  <i
-                    class="pi pi-times-circle"
-                    *ngIf="
-                      topUpForm.controls['pin'].value &&
-                      (topUpForm.controls['pin'].dirty ||
-                        topUpForm.controls['pin'].touched)
-                    "
-                    style="margin-top: 10px"
-                  ></i>
                 </div>
   
                 <div
@@ -83,6 +74,12 @@
                     *ngIf="topUpForm.controls['pin'].errors?.['maxlength']"
                   >
                     PIN must be 4 characters long.
+                  </div>
+                  <div
+                    class="text-danger"
+                    *ngIf="topUpForm.controls['pin'].errors?.['pattern']"
+                  >
+                  PIN must be a 4 digit numeric combination.
                   </div>
                 </div>
               </div>
