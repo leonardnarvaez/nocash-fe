@@ -8,6 +8,7 @@ import { environment } from 'src/app/environments/environment';
 import { catchError, throwError } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
+import { FailDialogComponent } from '../fail-dialog/fail-dialog.component';
 
 @Component({
   selector: 'app-cash-in-form',
@@ -18,7 +19,7 @@ export class CashInFormComponent {
   topUpForm: FormGroup;
   urlEndPoint = `${environment.API_HOST}/api/card-transaction/cash-in`
   cardId!: String;
-  dialogRef!: MatDialogRef<SuccessDialogComponent>;
+  dialogRef!: MatDialogRef<SuccessDialogComponent, FailDialogComponent>;
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
@@ -71,6 +72,20 @@ export class CashInFormComponent {
     });
   }
 
+  openFailDialog(errorMessage: string): void {
+    const dialogRef = this.dialog.open(FailDialogComponent, {
+      disableClose: false,
+      autoFocus: false,
+      data: {
+        errorMessage: errorMessage
+      }
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    })
+  }
+
   positiveBalanceValidator(control: AbstractControl) {
     const balance = control.value;
     if (balance < 0) {
@@ -83,7 +98,7 @@ export class CashInFormComponent {
     this.location.back();
   }
 
-  private handleError(error: HttpErrorResponse) {
+  private handleError = (error: HttpErrorResponse) => {
     if (error.status === 0) 
     {
       console.error('An error occurred:', error.error);
@@ -91,7 +106,7 @@ export class CashInFormComponent {
     else 
     {
       console.warn(error);
-      alert(error.error.message);
+      this.openFailDialog(error.error.message);
     }
     return throwError(() => new Error(''))
   }
