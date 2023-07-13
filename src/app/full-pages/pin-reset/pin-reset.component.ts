@@ -44,7 +44,7 @@ export class PinResetComponent implements OnInit{
     .pipe(catchError(this.handleError))
       .subscribe((response: any) => {
         console.log(response);
-        this.openSuccessDialog();
+        this.openSuccessDialog(response.message);
       });
   }
 
@@ -65,10 +65,13 @@ export class PinResetComponent implements OnInit{
     return throwError(() => new Error(''))
   }
 
-  openSuccessDialog(): void {
+  openSuccessDialog(successMessage: string): void {
     const dialogRef = this.dialog.open(SuccessDialogComponent, {
       disableClose: false,
-      autoFocus: false
+      autoFocus: false,
+      data: {
+        successMessage: successMessage
+      }
     });
   
     dialogRef.afterClosed().subscribe(result => {

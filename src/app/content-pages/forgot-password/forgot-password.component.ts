@@ -9,7 +9,7 @@ import { environment } from 'src/app/environments/environment';
 import { catchError, throwError } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FailDialogComponent } from 'src/app/full-pages/fail-dialog/fail-dialog.component';
-import { SuccessDialogComponent } from 'src/app/full-pages/success-dialog/success-dialog.component';
+import { ContentDialogComponent } from '../content-dialog/content-dialog.component';
 
 @Component({
   selector: 'app-forgot-password',
@@ -25,7 +25,7 @@ export class ForgotPasswordComponent implements OnInit {
   reactivationUrl = environment.API_HOST + '/authentication/reactivate-account';
   isCodeRequestSuccess: boolean = false;
   isReactivationSuccess: boolean = false;
-  dialogRef!: MatDialogRef<SuccessDialogComponent,FailDialogComponent>;
+  dialogRef!: MatDialogRef<ContentDialogComponent,FailDialogComponent>;
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -80,7 +80,7 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   openSuccessDialog(successMessage: string): void {
-    const dialogRef = this.dialog.open(SuccessDialogComponent, {
+    const dialogRef = this.dialog.open(ContentDialogComponent, {
       disableClose: false,
       autoFocus: false,
       data: {
