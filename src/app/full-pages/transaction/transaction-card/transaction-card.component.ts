@@ -11,6 +11,7 @@ export class TransactionCardComponent implements OnInit {
   @Input() transaction!:Transaction;
   sign: string = '-';
   cssClass: string = 'price text-success';
+  transactionCategory!: string;
   constructor(
     private route: Router
   ) {
@@ -25,8 +26,28 @@ export class TransactionCardComponent implements OnInit {
         this.sign = '-'
       }
     }
+    this.setTransactionCategory()
   }
   goToDetail() {
     this.route.navigateByUrl(`/app/transaction/${this.transaction.id}`);
+  }
+
+  setTransactionCategory() {
+    switch(this.transaction.transactionType){
+      case 'PAY_BILL':{
+        this.transactionCategory = 'Bills Payment';
+        break;
+      }
+      case 'CASH_OUT':
+      case 'CASH_IN': {
+        this.transactionCategory = 'Bank Tranfer';
+        break;
+      }
+      case 'TRANSFER_FROM':
+      case 'TRANSFER_TO':{
+        this.transactionCategory = 'Money Transfer';
+        break;
+      }
+    }
   }
 }

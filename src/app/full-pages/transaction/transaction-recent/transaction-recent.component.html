@@ -1,1 +1,14 @@
-<p>transaction-recent works!</p>
+
+    <div class="section mt-2">
+        <div class="section-heading">
+            <h2 class="title">Transactions</h2>
+            <a routerLink="/app/transaction/history" class="link">View All</a>
+        </div>
+        <div class="transactions">
+            <div *ngFor="let transaction of recentTransactions">
+                <!-- <li> -->
+                    <app-transaction-card [transaction]="transaction"></app-transaction-card>
+                <!-- </li> -->
+            </div>
+        </div>
+    </div>
