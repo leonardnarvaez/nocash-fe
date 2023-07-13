@@ -26,6 +26,9 @@
                 <div class="text-danger" *ngIf="topUpForm.controls['balance'].errors?.['negative']">
                     Balance cannot be negative.
                   </div>
+                  <div class="text-danger" *ngIf="topUpForm.controls['balance'].errors?.['overLimit']">
+                    Amount exceeds the limit.
+                  </div>
               </div>
             </div>
             <!-- Balance -->

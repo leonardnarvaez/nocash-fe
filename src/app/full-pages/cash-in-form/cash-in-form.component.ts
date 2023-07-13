@@ -31,7 +31,7 @@ export class CashInFormComponent {
   ) {
     this.topUpForm = this.formBuilder.group (
       {
-        balance: ['', [Validators.required, this.positiveBalanceValidator]],
+        balance: ['', [Validators.required, this.positiveBalanceValidator, this.topUpLimitValidator]],
         pin: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
       }
     )
@@ -90,6 +90,14 @@ export class CashInFormComponent {
     const balance = control.value;
     if (balance < 0) {
       return { negative: true };
+    }
+    return null;
+  }
+
+  topUpLimitValidator(control: AbstractControl) {
+    const balance = control.value;
+    if (balance > 25000) {
+      return { overLimit: true };
     }
     return null;
   }
