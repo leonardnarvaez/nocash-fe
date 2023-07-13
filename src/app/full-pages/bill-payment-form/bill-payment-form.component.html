@@ -1,120 +1,121 @@
-<div style="padding-bottom: 60px;">
-    <div class="appHeader">
-      <div class="left">
-          <i class=" headerButton pi pi-arrow-left" (click)="goBack()"></i>
-      </div>
-      <div class="pageTitle">Pay Bill</div>
+<div style="padding-bottom: 60px">
+  <div class="appHeader">
+    <div class="left">
+      <i class="headerButton pi pi-arrow-left" (click)="goBack()"></i>
     </div>
+    <div class="pageTitle">Pay Bill</div>
   </div>
-<div id="appCapsule">
-    <div class="section mt-2">
-      <div class="section-title">Enter the required details below.</div>
-      <div class="card">
-        <div class="card-body">
-          <form [formGroup]="billPaymentForm" (ngSubmit)="payBill()">
-            <!-- Card Name -->
-            <div class="form-group basic">
-              <div class="input-wrapper">
-                <label class="label" for="accountNumber">Account Number</label>
-                <input
-                  class="form-control"
-                  type="number"
-                  id="accountNumber"
-                  formControlName="accountNumber"
-                  placeholder="Enter account number."
-                  required
-                />
-              </div>
-            </div>
-            <!-- Balance -->
-  
-            <!-- Amount -->
-            <div class="form-group basic">
-                <div class="input-wrapper">
-                  <label class="label" for="amount">Amount</label>
-                  <input
-                    class="form-control"
-                    type="number"
-                    id="amount"
-                    formControlName="amount"
-                    placeholder="Enter amount."
-                    required
-                  />
-                  <div class="text-danger" *ngIf="billPaymentForm.controls['amount'].errors?.['negative']">
-                    Amount cannot be negative.
-                  </div>
-                </div>
-              </div>
-            <!-- Amount -->
-
-            <!-- PIN -->
-            <div class="form-group basic">
-              <div class="input-wrapper">
-                <label class="label" for="pin">PIN</label>
-                <div class="input-group">
-                  <input
-                    type="password"
-                    id="pin"
-                    formControlName="pin"
-                    class="form-control"
-                    placeholder="Enter your PIN."
-                    required
-                    minlength="4"
-                    maxlength="4"
-                  />
-                  <i
-                    class="pi pi-times-circle"
-                    *ngIf="
-                    billPaymentForm.controls['pin'].value &&
-                      (billPaymentForm.controls['pin'].dirty ||
-                      billPaymentForm.controls['pin'].touched)
-                    "
-                    style="margin-top: 10px"
-                  ></i>
-                </div>
-  
-                <div
-                  *ngIf="
-                  billPaymentForm.controls['pin'].invalid &&
-                    (billPaymentForm.controls['pin'].dirty ||
-                    billPaymentForm.controls['pin'].touched)
-                  "
-                >
-                  <div
-                    class="text-danger"
-                    *ngIf="billPaymentForm.controls['pin'].errors?.['required']"
-                  >
-                    PIN is required.
-                  </div>
-                  <div
-                    class="text-danger"
-                    *ngIf="billPaymentForm.controls['pin'].errors?.['minlength']"
-                  >
-                    PIN must be 4 characters long.
-                  </div>
-                  <div
-                    class="text-danger"
-                    *ngIf="billPaymentForm.controls['pin'].errors?.['maxlength']"
-                  >
-                    PIN must be 4 characters long.
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <!-- PIN -->
-            <div class="form-group basic mt-2">
-              <button
-                type="submit"
-                class="btn btn-primary btn-block btn-lg"
-                [disabled]="!billPaymentForm.valid"
-              >
-                Submit
-              </button>
-            </div>
-          </form>
+</div>
+<app-merchant [merchant]="merchant"></app-merchant>
+<div class="section mt-2">
+  <div class="section-title">Enter payment details.</div>
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="billPaymentForm" (ngSubmit)="payBill()">
+        <!-- Card Name -->
+        <div class="form-group basic">
+          <div class="input-wrapper">
+            <label class="label" for="accountNumber">Account Number</label>
+            <input
+              class="form-control"
+              type="number"
+              id="accountNumber"
+              formControlName="accountNumber"
+              placeholder="Enter account number."
+              required
+            />
+          </div>
         </div>
-      </div>
+        <!-- Balance -->
+
+        <!-- Amount -->
+        <div class="form-group basic">
+          <div class="input-wrapper">
+            <label class="label" for="amount">Amount</label>
+            <input
+              class="form-control"
+              type="number"
+              id="amount"
+              formControlName="amount"
+              placeholder="Enter amount."
+              required
+            />
+            <div
+              class="text-danger"
+              *ngIf="billPaymentForm.controls['amount'].errors?.['negative']"
+            >
+              Amount cannot be negative.
+            </div>
+          </div>
+        </div>
+        <!-- Amount -->
+
+        <!-- PIN -->
+        <div class="form-group basic">
+          <div class="input-wrapper">
+            <label class="label" for="pin">PIN</label>
+            <div class="input-group">
+              <input
+                type="password"
+                id="pin"
+                formControlName="pin"
+                class="form-control"
+                placeholder="Enter your PIN."
+                required
+                minlength="4"
+                maxlength="4"
+              />
+              <i
+                class="pi pi-times-circle"
+                *ngIf="
+                  billPaymentForm.controls['pin'].value &&
+                  (billPaymentForm.controls['pin'].dirty ||
+                    billPaymentForm.controls['pin'].touched)
+                "
+                style="margin-top: 10px"
+              ></i>
+            </div>
+
+            <div
+              *ngIf="
+                billPaymentForm.controls['pin'].invalid &&
+                (billPaymentForm.controls['pin'].dirty ||
+                  billPaymentForm.controls['pin'].touched)
+              "
+            >
+              <div
+                class="text-danger"
+                *ngIf="billPaymentForm.controls['pin'].errors?.['required']"
+              >
+                PIN is required.
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="billPaymentForm.controls['pin'].errors?.['minlength']"
+              >
+                PIN must be 4 characters long.
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="billPaymentForm.controls['pin'].errors?.['maxlength']"
+              >
+                PIN must be 4 characters long.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PIN -->
+        <div class="form-group basic mt-2">
+          <button
+            type="submit"
+            class="btn btn-primary btn-block btn-lg"
+            [disabled]="!billPaymentForm.valid"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
     </div>
   </div>
-  
+</div>

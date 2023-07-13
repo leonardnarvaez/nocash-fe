@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
@@ -7,6 +7,8 @@ import { Location } from '@angular/common';
 import { catchError, throwError } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
+import { Merchant } from 'src/app/models/merchant';
+import { MerchantService } from 'src/app/services/merchant.service';
 
 
 @Component({
@@ -14,10 +16,11 @@ import { SuccessDialogComponent } from '../success-dialog/success-dialog.compone
   templateUrl: './bill-payment-form.component.html',
   styleUrls: ['./bill-payment-form.component.css']
 })
-export class BillPaymentFormComponent {
+export class BillPaymentFormComponent implements OnInit{
+  merchant: Merchant;
   billPaymentForm: FormGroup;
   urlEndPoint = `${environment.API_HOST}/api/merchant/payment`
-  merchantId!: String;
+  merchantId!: string;
   accountNumber!: String;
   dialogRef!: MatDialogRef<SuccessDialogComponent>;
 
@@ -27,7 +30,8 @@ export class BillPaymentFormComponent {
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private merchantService: MerchantService
   ){
     this.billPaymentForm = this.formBuilder.group(
       {
@@ -39,6 +43,18 @@ export class BillPaymentFormComponent {
     this.route.params.subscribe(params => {
       this.merchantId = params['merchantId'] ? params['merchantId'] : 'Not set';
     })
+
+    this.merchant = new Merchant('', '', '', new Date, '');
+  }
+  ngOnInit(): void {
+   const retrievedMerchant: Merchant | undefined = this.merchantService.getMerchant(this.merchantId);
+   if(typeof (retrievedMerchant) !== 'undefined') {
+    this.merchant = retrievedMerchant;
+   } else {
+    this.merchantService.findOne(this.merchantId).subscribe((merchant: Merchant) => {
+      this.merchant = merchant;
+    });
+   }
   }
   
   payBill(): void {
