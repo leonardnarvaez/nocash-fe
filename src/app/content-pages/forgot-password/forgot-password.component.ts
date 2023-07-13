@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
+import { MustMatch } from './must-match-validator';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/app/environments/environment';
 import { catchError, throwError } from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { FailDialogComponent } from 'src/app/full-pages/fail-dialog/fail-dialog.component';
+import { ContentDialogComponent } from '../content-dialog/content-dialog.component';
 
 @Component({
   selector: 'app-forgot-password',
@@ -21,12 +25,14 @@ export class ForgotPasswordComponent implements OnInit {
   reactivationUrl = environment.API_HOST + '/authentication/reactivate-account';
   isCodeRequestSuccess: boolean = false;
   isReactivationSuccess: boolean = false;
+  dialogRef!: MatDialogRef<ContentDialogComponent,FailDialogComponent>;
   constructor(
     private authService: AuthService,
     private router: Router,
     private formBuilder: FormBuilder,
     private location: Location,
-    private http: HttpClient
+    private http: HttpClient,
+    private dialog: MatDialog
   ){
     this.requestPasswordResetForm = formBuilder.group(
       {
@@ -37,7 +43,7 @@ export class ForgotPasswordComponent implements OnInit {
       {
         newPin: ['', [Validators.required, Validators.pattern('[0-9]{4}'), Validators.minLength(4), Validators.maxLength(4)]],
         confirmPin: ['', [Validators.required, Validators.pattern('[0-9]{4}'), Validators.minLength(4), Validators.maxLength(4)]]
-      }
+      }, { validator: MustMatch("newPin", "confirmPin")}
     )
     this.verificationCodeForm = formBuilder.group(
       {
@@ -62,7 +68,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.http.post<any>(this.reactivationRequestUrl, this.requestPasswordResetForm.value)
     .pipe(catchError(this.handleError))
     .subscribe(response => {
-      alert(response.message);
+      this.openSuccessDialog(response.message);
       console.info(response);
       this.currentPage = 'code-form';
       this.isCodeRequestSuccess = true;
@@ -73,6 +79,34 @@ export class ForgotPasswordComponent implements OnInit {
     this.currentPage = 'pin-reset-form';
   }
 
+  openSuccessDialog(successMessage: string): void {
+    const dialogRef = this.dialog.open(ContentDialogComponent, {
+      disableClose: false,
+      autoFocus: false,
+      data: {
+        successMessage: successMessage
+      }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  openFailDialog(errorMessage: string): void {
+    const dialogRef = this.dialog.open(FailDialogComponent, {
+      disableClose: false,
+      autoFocus: false,
+      data: {
+        errorMessage: errorMessage
+      }
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    })
+  }
+
   resetPin(): void {
     const email = this.requestPasswordResetForm.value['email'];
     const code = this.verificationCodeForm.value['code'];
@@ -81,12 +115,22 @@ export class ForgotPasswordComponent implements OnInit {
     this.http.post<any>(this.reactivationUrl, {email, code, newPIN})
     .pipe(catchError(this.handleError))
     .subscribe(response => {
-      alert(response.message);
+      this.openSuccessDialog(response.message)
       console.info(response);
       this.currentPage = 'success-page';
       this.isReactivationSuccess = true;
     });
   }
+
+  pinEqualsValidator(control: AbstractControl) {
+    const newPin: string = control.get('newPin')?.value;
+    const confirmPin: string = control.get('confirmPin')?.value;
+    
+    if (newPin !== confirmPin) {
+      return { notEqual: true}
+    }
+    return null;
+  } 
 
   goBack(): void {
     if(this.currentPage === 'main') {
@@ -105,7 +149,7 @@ export class ForgotPasswordComponent implements OnInit {
     return this.currentPage === 'code-form' && !this.isCodeRequestSuccess
   }
 
-  private handleError(error: HttpErrorResponse) {
+  private handleError = (error: HttpErrorResponse) => {
     if (error.status === 0) 
     {
       console.error('An error occurred:', error.error);
@@ -113,7 +157,7 @@ export class ForgotPasswordComponent implements OnInit {
     else 
     {
       console.warn(error);
-      alert(error.error.message);
+      this.openFailDialog(error.error.message);
     }
     // to prevent a bug where if the logout request failed 
     // this.stateService.removeCurrentUser();

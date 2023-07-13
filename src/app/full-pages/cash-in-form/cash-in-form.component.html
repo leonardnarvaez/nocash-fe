@@ -14,7 +14,7 @@
             <!-- Card Name -->
             <div class="form-group basic">
               <div class="input-wrapper">
-                <label class="label" for="balance">Balance</label>
+                <label class="label" for="balance">Amount</label>
                 <input
                   class="form-control"
                   type="number"
@@ -24,7 +24,7 @@
                   required
                 />
                 <div class="text-danger" *ngIf="topUpForm.controls['balance'].errors?.['negative']">
-                    Balance cannot be negative.
+                    Amount cannot be negative.
                   </div>
               </div>
             </div>

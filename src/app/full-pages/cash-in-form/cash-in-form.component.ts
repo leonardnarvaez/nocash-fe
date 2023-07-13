@@ -50,21 +50,22 @@ export class CashInFormComponent {
       cardId: this.cardId,
       pin: this.topUpForm.get('pin')?.value
     }
-    this.http.post<HttpResponse<any>>(this.urlEndPoint, payload)
+    this.http.post<any>(this.urlEndPoint, payload)
     .pipe(
       catchError(this.handleError)
     )
-    .subscribe(
-      (response: HttpResponse<any>) => {
-        console.log(response)
-        this.openSuccessDialog();
-      }
-    )
+    .subscribe(response => {
+      this.openSuccessDialog(response.message);
+      console.info(response);
+    });
   }
-  openSuccessDialog(): void {
+  openSuccessDialog(successMessage: string): void {
     const dialogRef = this.dialog.open(SuccessDialogComponent, {
       disableClose: false,
-      autoFocus: false
+      autoFocus: false,
+      data: {
+        successMessage: successMessage
+      }
     });
   
     dialogRef.afterClosed().subscribe(result => {
