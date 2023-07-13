@@ -18,6 +18,9 @@ import { TransactionDetailComponent } from './transaction-detail/transaction-det
   imports: [
     CommonModule,
     TransactionRoutingModule
+  ],
+  exports: [
+    TransactionRecentComponent
   ]
 })
 export class TransactionModule { }

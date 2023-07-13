@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { TransactionService } from 'src/app/services/transaction.service';
 import { Transaction } from 'src/app/models/transaction';
+import { HttpErrorResponse } from '@angular/common/http';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-transaction-detail',
@@ -29,7 +31,24 @@ export class TransactionDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(data => {
       this.transactionId = data['transactionId'];
-      this.transaction = this.transactionService.getTransaction(this.transactionId)?? this.transaction;
+      const retrievedTransaction: Transaction | undefined = this.transactionService.getTransaction(this.transactionId);
+      if(typeof retrievedTransaction !== 'undefined') {
+        this.transaction = retrievedTransaction;
+        this.setHeader();
+        this.setTransactionCategory();
+        console.log(this.transaction);
+      } else {
+        this.transactionService.findOne(this.transactionId)
+          .pipe(
+            catchError(this.handleError)
+          )
+          .subscribe((transaction: Transaction) => {
+            this.transaction = transaction;
+            this.setHeader();
+            this.setTransactionCategory();
+            console.log(this.transaction);
+          })
+      }
       this.setHeader();
       this.setTransactionCategory();
       console.log(this.transaction);
@@ -77,5 +96,18 @@ export class TransactionDetailComponent implements OnInit {
         break;
       }
     }
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) 
+    {
+      console.error('An error occurred:', error.error);
+    }
+    else 
+    {
+      console.warn(error);
+      alert(error.error.message);
+    }
+    return throwError(() => new Error(''))
   }
 }

@@ -4,8 +4,8 @@
             <div class="in">
                 <div>
                     <strong>{{transaction.payee}}</strong>
-                    <div class="text-small text-secondary">{{transaction.transactionType}}</div>
-                    <small class="text-small text-secondary">{{transaction.referenceNumber}}</small>
+                    <div class="text-small text-secondary">{{transactionCategory}}</div>
+                    <!-- <small class="text-small text-secondary">{{transaction.referenceNumber}}</small> -->
                     
                 </div>
 
@@ -14,7 +14,7 @@
         <div class="right">
             <div class="text-end">
                 <div [ngClass]="cssClass">{{sign}} ₱{{transaction.amount}} </div>
-                <strong>{{transaction.date | date:'short'}}</strong>
+                <!-- <strong>{{transaction.date | date:'short'}}</strong> -->
             </div>
         </div>
     </div>

@@ -23,6 +23,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FailDialogComponent } from './fail-dialog/fail-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TransactionRecentComponent } from './transaction/transaction-recent/transaction-recent.component';
+import { TransactionModule } from './transaction/transaction.module';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { HttpClientModule } from '@angular/common/http';
     AuthenticationHistoryModule,
     MatButtonModule,
     MatDialogModule,
-    HttpClientModule
+    HttpClientModule,
+    TransactionModule
   ]
 })
 export class FullPagesModule { }

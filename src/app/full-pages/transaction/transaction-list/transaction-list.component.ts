@@ -4,6 +4,7 @@ import { catchError, take, throwError } from 'rxjs';
 import { Transaction } from 'src/app/models/transaction';
 import { TransactionService } from 'src/app/services/transaction.service';
 import { Location } from '@angular/common';
+import { getFirstAndLastDay, convertDate } from 'src/app/util/date-util';
 
 @Component({
   selector: 'app-transaction-list',
@@ -17,7 +18,8 @@ export class TransactionListComponent implements OnInit {
     private location: Location
   ) {}
   ngOnInit(): void {
-    this.transactionService.findAllByInterval(new Date(), new Date())
+    const [startDay, lastDay] = getFirstAndLastDay(new Date());
+    this.transactionService.findAllByInterval(startDay, lastDay)
       .pipe(
         catchError(this.handleError)
       )
