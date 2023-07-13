@@ -11,7 +11,7 @@
                     <div>
                         <strong>{{authenticationHistory.authenticationType}}</strong>
                         <div class="text-small text-secondary">{{authenticationHistory.ipAddress}}</div>
-                        <div class="text-small text-secondary">{{authenticationHistory.userAgent}}</div>
+                        <div class="text-small text-secondary">{{userAgentTrimmed}}</div>
                     </div>
                     <div class="text-end">
                         <strong>{{authenticationHistory.creationTime | date:'short'}}</strong>
