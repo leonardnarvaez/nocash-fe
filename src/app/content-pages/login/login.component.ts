@@ -4,7 +4,9 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router, ActivatedRoute} from '@angular/router';
 import { User } from 'src/app/models/user';
 import { catchError, throwError } from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FailDialogComponent } from 'src/app/full-pages/fail-dialog/fail-dialog.component';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +17,9 @@ export class LoginComponent implements OnInit{
   private returnUrl: string;
   loginForm!: FormGroup;
   submitted = false;
+  dialogRef!: MatDialogRef<FailDialogComponent>;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private route: ActivatedRoute){
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog){
     this.returnUrl =
     this.route.snapshot.queryParams["returnUrl"] || "/app/home";
   } 
@@ -64,7 +67,21 @@ export class LoginComponent implements OnInit{
     
   }
 
-  private handleError(error: HttpErrorResponse) {
+  openFailDialog(errorMessage: string): void {
+    const dialogRef = this.dialog.open(FailDialogComponent, {
+      disableClose: false,
+      autoFocus: false,
+      data: {
+        errorMessage: errorMessage
+      }
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    })
+  }
+
+  private handleError = (error: HttpErrorResponse) => {
     if (error.status === 0) 
     {
       console.error('An error occurred:', error.error);
@@ -72,7 +89,7 @@ export class LoginComponent implements OnInit{
     else 
     {
       console.warn(error);
-      alert(error.error.message);
+      this.openFailDialog(error.error.message);
     }
     return throwError(() => new Error(''))
   }

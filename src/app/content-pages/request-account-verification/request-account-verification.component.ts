@@ -3,9 +3,11 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { environment } from 'src/app/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
 import { Location } from '@angular/common';
+import { ContentDialogComponent } from '../content-dialog/content-dialog.component';
 
 @Component({
   selector: 'app-request-account-verification',
@@ -20,12 +22,14 @@ export class RequestAccountVerificationComponent {
   reactivationUrl = environment.API_HOST + '/authentication/verify-email';
   isCodeRequestSuccess: boolean = false;
   isAccountVerificationSuccess: boolean = false;
+  dialogRef!: MatDialogRef<ContentDialogComponent>
   constructor(
     private authService: AuthService,
     private router: Router,
     private formBuilder: FormBuilder,
     private location: Location,
-    private http: HttpClient
+    private http: HttpClient,
+    private dialog: MatDialog
   ){
     this.emailForm = formBuilder.group(
       {
@@ -52,7 +56,7 @@ export class RequestAccountVerificationComponent {
     this.http.post<any>(this.accountVerificationRequestUrl, this.emailForm.value)
     .pipe(catchError(this.handleError))
     .subscribe(response => {
-      alert(response);
+      this.openSuccessDialog(response.message);
       console.info(response);
       this.currentPage = 'code-form';
       this.isCodeRequestSuccess = true;
@@ -66,7 +70,7 @@ export class RequestAccountVerificationComponent {
     this.http.post<any>(this.reactivationUrl, {email, code})
     .pipe(catchError(this.handleError))
     .subscribe(response => {
-      alert(response);
+      this.openSuccessDialog(response.message);
       console.info(response);
       this.currentPage = 'success-page';
       this.isAccountVerificationSuccess = true;
@@ -88,6 +92,20 @@ export class RequestAccountVerificationComponent {
     return this.currentPage === 'code-form' && !this.isCodeRequestSuccess
   }
 
+  openSuccessDialog(successMessage: string): void {
+    const dialogRef = this.dialog.open(ContentDialogComponent, {
+      disableClose: false,
+      autoFocus: false,
+      data: {
+        successMessage: successMessage
+      }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) 
     {
@@ -100,6 +118,6 @@ export class RequestAccountVerificationComponent {
     }
     // to prevent a bug where if the logout request failed 
     // this.stateService.removeCurrentUser();
-    return throwError(() => new Error('HAHAHAHAHA'))
+    return throwError(() => new Error(''))
   }
 }

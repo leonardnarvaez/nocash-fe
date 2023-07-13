@@ -10,6 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { RequestAccountVerificationComponent } from './request-account-verification/request-account-verification.component';
+import { ContentDialogComponent } from './content-dialog/content-dialog.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import { RequestAccountVerificationComponent } from './request-account-verificat
     LoginComponent,
     RegisterComponent,
     ForgotPasswordComponent,
-    RequestAccountVerificationComponent
+    RequestAccountVerificationComponent,
+    ContentDialogComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +30,8 @@ import { RequestAccountVerificationComponent } from './request-account-verificat
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    HttpClientModule
   ]
 })
 export class ContentPagesModule { }

@@ -74,20 +74,21 @@ export class BillPaymentFormComponent implements OnInit{
       accountNumber: this.billPaymentForm.get('accountNumber')?.value,
       pin: this.billPaymentForm.get('pin')?.value
     }
-    this.http.post<HttpResponse<any>>(this.urlEndPoint, payload).pipe(
+    this.http.post<any>(this.urlEndPoint, payload).pipe(
       catchError(this.handleError)
-    ).subscribe(
-      (response: HttpResponse<any>) => {
-        console.log(response)
-        this.openSuccessDialog();
-      }
-    )
+    ).subscribe(response => {
+      this.openSuccessDialog(response.message)
+      console.info(response);
+    });
   }
 
-  openSuccessDialog(): void {
+  openSuccessDialog(successMessage: string): void {
     const dialogRef = this.dialog.open(SuccessDialogComponent, {
       disableClose: false,
-      autoFocus: false
+      autoFocus: false,
+      data: {
+        successMessage: successMessage
+      }
     });
   
     dialogRef.afterClosed().subscribe(result => {

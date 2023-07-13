@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit{
     this.authService.register(emailAddress, mobileNumber, pin)
     .pipe(catchError(this.handleError))
     .subscribe((user: User) => {
-      this.router.navigateByUrl("/login");
+      this.router.navigateByUrl("/verify-account");
     })
   }
 
