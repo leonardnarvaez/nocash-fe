@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { MustMatch } from './must-match-validator';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
+import { FailDialogComponent } from '../fail-dialog/fail-dialog.component';
 @Component({
   selector: 'app-pin-reset',
   templateUrl: './pin-reset.component.html',
@@ -16,7 +17,7 @@ import { SuccessDialogComponent } from '../success-dialog/success-dialog.compone
 export class PinResetComponent implements OnInit{
   pinResetForm: FormGroup;
   pinResetURL = environment.API_HOST + '/api/security/pin-reset/';
-  dialogRef!: MatDialogRef<SuccessDialogComponent>;
+  dialogRef!: MatDialogRef<SuccessDialogComponent, FailDialogComponent>;
   constructor(
     private formBuilder: FormBuilder,
     private location: Location,
@@ -51,7 +52,7 @@ export class PinResetComponent implements OnInit{
     this.location.back();
   }
 
-  private handleError(error: HttpErrorResponse) {
+  private handleError = (error: HttpErrorResponse) => {
     if (error.status === 0) 
     {
       console.error('An error occurred:', error.error);
@@ -59,7 +60,7 @@ export class PinResetComponent implements OnInit{
     else 
     {
       console.warn(error);
-      alert(error.error.message);
+      this.openFailDialog(error.error.message);
     }
     return throwError(() => new Error(''))
   }
@@ -73,6 +74,20 @@ export class PinResetComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
     });
+  }
+
+  openFailDialog(errorMessage: string): void {
+    const dialogRef = this.dialog.open(FailDialogComponent, {
+      disableClose: false,
+      autoFocus: false,
+      data: {
+        errorMessage: errorMessage
+      }
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    })
   }
 
   pinEqualsValidator(control: AbstractControl) {
