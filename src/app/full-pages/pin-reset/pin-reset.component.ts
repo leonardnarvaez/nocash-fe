@@ -6,6 +6,8 @@ import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/htt
 import { catchError, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { MustMatch } from './must-match-validator';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
 @Component({
   selector: 'app-pin-reset',
   templateUrl: './pin-reset.component.html',
@@ -14,11 +16,13 @@ import { MustMatch } from './must-match-validator';
 export class PinResetComponent implements OnInit{
   pinResetForm: FormGroup;
   pinResetURL = environment.API_HOST + '/api/security/pin-reset/';
+  dialogRef!: MatDialogRef<SuccessDialogComponent>;
   constructor(
     private formBuilder: FormBuilder,
     private location: Location,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
     this.pinResetForm = formBuilder.group({
       oldPin: ['', [Validators.required, Validators.pattern('[0-9]{4}'), Validators.minLength(4), Validators.maxLength(4)]],
@@ -39,8 +43,7 @@ export class PinResetComponent implements OnInit{
     .pipe(catchError(this.handleError))
       .subscribe((response: any) => {
         console.log(response);
-        alert(response.message);
-        this.router.navigateByUrl('/app/home');
+        this.openSuccessDialog();
       });
   }
 
@@ -59,6 +62,17 @@ export class PinResetComponent implements OnInit{
       alert(error.error.message);
     }
     return throwError(() => new Error(''))
+  }
+
+  openSuccessDialog(): void {
+    const dialogRef = this.dialog.open(SuccessDialogComponent, {
+      disableClose: false,
+      autoFocus: false
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 
   pinEqualsValidator(control: AbstractControl) {
