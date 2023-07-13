@@ -26,7 +26,7 @@
                   placeholder="Your mobile number"
                   required
                   minlength="11"
-                  maxlength="11"
+                  maxlength="13"
                 />
                 <div
             *ngIf="
@@ -45,19 +45,19 @@
               class="text-danger"
               *ngIf="loginForm.controls['mobileNumber'].errors?.['minlength']"
             >
-            Mobile Number must be 11 digits long.
+            Mobile Number must be at least 11 digits long.
             </div>
             <div
               class="text-danger"
               *ngIf="loginForm.controls['mobileNumber'].errors?.['maxlength']"
             >
-            Mobile Number must be 11 digits long.
+            Mobile Number must only have 13 digits.
             </div>
             <div
               class="text-danger"
               *ngIf="loginForm.controls['mobileNumber'].errors?.['pattern']"
             >
-            Mobile Number must be a 11 digit numeric combination.
+            Invalid mobile number format.
             </div>
           </div>
                 <i class="clear-input"> </i>
