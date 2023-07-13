@@ -6,6 +6,8 @@ import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/htt
 import { MessageService } from 'src/app/services/message.service';
 import { environment } from 'src/app/environments/environment';
 import { catchError, throwError } from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
 
 @Component({
   selector: 'app-cash-out-form',
@@ -16,13 +18,15 @@ export class CashOutFormComponent {
   cashOutForm: FormGroup;
   urlEndPoint = `${environment.API_HOST}/api/card-transaction/cash-out`
   cardId!: String;
+  dialogRef!: MatDialogRef<SuccessDialogComponent>;
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private messageService: MessageService,
     private router: Router,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private dialog: MatDialog
   ){
     this.cashOutForm = this.formBuilder.group (
       {
@@ -52,11 +56,21 @@ export class CashOutFormComponent {
     .subscribe(
       (response: HttpResponse<any>) => {
         console.log(response)
-        // alert('Cash Out Complete!');
-        this.router.navigateByUrl('/app/success')
+        this.openSuccessDialog();
       }
     )
     
+  }
+
+  openSuccessDialog(): void {
+    const dialogRef = this.dialog.open(SuccessDialogComponent, {
+      disableClose: false,
+      autoFocus: false
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 
   positiveBalanceValidator(control: AbstractControl) {

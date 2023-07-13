@@ -20,7 +20,6 @@ export class BillPaymentFormComponent {
   merchantId!: String;
   accountNumber!: String;
   dialogRef!: MatDialogRef<SuccessDialogComponent>;
-  // successDialog = 
 
   constructor(
     private formBuilder: FormBuilder,

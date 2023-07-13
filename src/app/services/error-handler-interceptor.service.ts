@@ -26,7 +26,6 @@ export class ErrorHandlerInterceptorService implements HttpInterceptor {
         },
         error: error => {
           if(error.status === 403) {
-            alert('Unauthorized Access')
             this.authService.logout().subscribe(m => {
               console.error(m);
               this.router.navigateByUrl('/login')
