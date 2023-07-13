@@ -17,13 +17,6 @@ const routes: Routes = [
     path: "",
     children: [
       {
-        path: "dashboard",
-        component: HeaderComponent,
-        data: {
-          title: "Dashboard",
-        },
-      },
-      {
         path: "home",
         component: HomeComponent,
         data: {

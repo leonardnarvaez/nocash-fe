@@ -24,6 +24,20 @@
               placeholder="Enter account number."
               required
             />
+            <div
+              *ngIf="
+                billPaymentForm.controls['accountNumber'].invalid &&
+                (billPaymentForm.controls['accountNumber'].dirty ||
+                  billPaymentForm.controls['accountNumber'].touched)
+              "
+            >
+              <div
+                class="text-danger"
+                *ngIf="billPaymentForm.controls['amount'].errors?.['required']"
+              >
+                Account number is required.
+              </div>
+            </div>
           </div>
         </div>
         <!-- Balance -->
@@ -41,10 +55,24 @@
               required
             />
             <div
-              class="text-danger"
-              *ngIf="billPaymentForm.controls['amount'].errors?.['negative']"
+              *ngIf="
+                billPaymentForm.controls['amount'].invalid &&
+                (billPaymentForm.controls['amount'].dirty ||
+                  billPaymentForm.controls['amount'].touched)
+              "
             >
-              Amount cannot be negative.
+              <div
+                class="text-danger"
+                *ngIf="billPaymentForm.controls['amount'].errors?.['required']"
+              >
+                Amount is required.
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="billPaymentForm.controls['amount'].errors?.['negative']"
+              >
+                Amount cannot be negative.
+              </div>
             </div>
           </div>
         </div>
@@ -65,15 +93,6 @@
                 minlength="4"
                 maxlength="4"
               />
-              <i
-                class="pi pi-times-circle"
-                *ngIf="
-                  billPaymentForm.controls['pin'].value &&
-                  (billPaymentForm.controls['pin'].dirty ||
-                    billPaymentForm.controls['pin'].touched)
-                "
-                style="margin-top: 10px"
-              ></i>
             </div>
 
             <div
