@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit{
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group(
       {
-        mobileNumber: ["", [Validators. required, Validators.pattern('[0-9]{11}')]],
+        mobileNumber: ["", [Validators. required, Validators.pattern("^(09|\\+639)\\d{9}$")]],
         pin: ["", [Validators.required, Validators.pattern('[0-9]{4}'), Validators.minLength(4), Validators.maxLength(4)]],
 
       },
