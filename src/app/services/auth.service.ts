@@ -39,10 +39,10 @@ export class AuthService {
 
   logout() {
     console.info("logout")
+    this.stateService.removeCurrentUser();
     return this.httpClient.get(`${this.API_HOST}/authentication/logout`).pipe(
       tap(message => {
         console.log(message);
-        this.stateService.removeCurrentUser();
       })
     );
   }

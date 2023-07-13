@@ -1,0 +1,22 @@
+<div class="jon" (click)="goToDetail()">
+    <div class="item">
+        <div class="detail">
+            <div class="in">
+                <div>
+                    <strong>{{transaction.payee}}</strong>
+                    <div class="text-small text-secondary">{{transaction.transactionType}}</div>
+                    <small class="text-small text-secondary">{{transaction.referenceNumber}}</small>
+                    
+                </div>
+
+            </div>
+        </div>
+        <div class="right">
+            <div class="text-end">
+                <div [ngClass]="cssClass">{{sign}} ₱{{transaction.amount}} </div>
+                <strong>{{transaction.date | date:'short'}}</strong>
+            </div>
+        </div>
+    </div>
+</div>
+

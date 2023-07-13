@@ -37,4 +37,7 @@ export abstract class CrudService<T, ID> implements CrudOperations<T, ID> {
     this._baseUrl = `${this._baseUrl}${endpoint}`;
   }
 
+  getBaseUrl(): string {
+    return this._baseUrl;
+  }
 }

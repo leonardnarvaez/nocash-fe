@@ -126,6 +126,10 @@ const routes: Routes = [
       {
         path: 'pin-reset',
         component: PinResetComponent
+      },
+      {
+        path: 'transaction',
+        loadChildren: () => import('./transaction/transaction.module').then(m => m.TransactionModule)
       }
     ]
     }
