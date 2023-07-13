@@ -7,6 +7,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 import { AuthStateService } from 'src/app/shared/auth-state.service';
 import { Location } from '@angular/common';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { FailDialogComponent } from 'src/app/full-pages/fail-dialog/fail-dialog.component';
 
 @Component({
   selector: 'app-register',
@@ -16,6 +18,7 @@ import { Location } from '@angular/common';
 export class RegisterComponent implements OnInit{
   registerForm!: FormGroup;
   submitted = false;
+  dialogRef!: MatDialogRef<FailDialogComponent>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,7 +26,8 @@ export class RegisterComponent implements OnInit{
     private router: Router, 
     private route: ActivatedRoute,
     private stateService: AuthStateService,
-    private location: Location) {
+    private location: Location,
+    private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -57,7 +61,21 @@ export class RegisterComponent implements OnInit{
     })
   }
 
-  private handleError(error: HttpErrorResponse) {
+  openFailDialog(errorMessage: string): void {
+    const dialogRef = this.dialog.open(FailDialogComponent, {
+      disableClose: false,
+      autoFocus: false,
+      data: {
+        errorMessage: errorMessage
+      }
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    })
+  }
+
+  private handleError = (error: HttpErrorResponse) => {
     if (error.status === 0) 
     {
       console.error('An error occurred:', error.error);
@@ -65,10 +83,8 @@ export class RegisterComponent implements OnInit{
     else 
     {
       console.warn(error);
-      alert(error.error.message);
+      this.openFailDialog(error.error.message);
     }
-    // to prevent a bug where if the logout request failed 
-    // this.stateService.removeCurrentUser();
     return throwError(() => new Error(''))
   }
 

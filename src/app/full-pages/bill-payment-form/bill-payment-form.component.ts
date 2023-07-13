@@ -38,7 +38,7 @@ export class BillPaymentFormComponent implements OnInit{
       {
         accountNumber: ['', [Validators.required]],
         amount: ['', [Validators.required, this.positiveBalanceValidator]],
-        pin: ['',  [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
+        pin: ['',  [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('[0-9]{4}')]]
       }
     )
     this.route.params.subscribe(params => {
