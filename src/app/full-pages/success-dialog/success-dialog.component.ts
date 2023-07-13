@@ -7,7 +7,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./success-dialog.component.css']
 })
 export class SuccessDialogComponent {
-constructor(public dialog: MatDialog){
+  constructor(public dialog: MatDialog){
 
 }
 }

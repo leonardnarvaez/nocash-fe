@@ -26,6 +26,8 @@ import { SettingsPanelComponent } from './settings-panel/settings-panel.componen
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FailDialogComponent } from './fail-dialog/fail-dialog.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     BillPaymentFormComponent,
     SettingsPanelComponent,
     SuccessDialogComponent,
+    FailDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -57,7 +60,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     FormsModule,
     AuthenticationHistoryModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule
   ]
 })
 export class FullPagesModule { }
