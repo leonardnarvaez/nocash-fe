@@ -6,6 +6,6 @@ export class Transaction {
         public payee: string,
         public referenceNumber: string,
         public accountNumber: string,
-        public date: Date
+        public creationTime: Date
     ){}
 }

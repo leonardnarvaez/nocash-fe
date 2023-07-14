@@ -9,7 +9,7 @@ import { Transaction } from 'src/app/models/transaction';
 })
 export class TransactionCardComponent implements OnInit {
   @Input() transaction!:Transaction;
-  sign: string = '-';
+  sign: string = '+';
   cssClass: string = 'price text-success';
   transactionCategory!: string;
   constructor(
