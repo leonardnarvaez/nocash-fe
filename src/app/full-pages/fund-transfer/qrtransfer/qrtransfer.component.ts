@@ -6,6 +6,8 @@ import { AuthStateService } from 'src/app/shared/auth-state.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SuccessDialogComponent } from '../../success-dialog/success-dialog.component';
 
 @Component({
   selector: 'app-qrtransfer',
@@ -17,7 +19,7 @@ export class QRTransferComponent {
   // mobileNumberForm: FormGroup;
   amountAndPinForm: FormGroup;
   doesMobileExists: boolean;
-
+  dialogRef!: MatDialogRef<SuccessDialogComponent>
   myPhoneNumber: string;
   scannedMobileNumber: string;
   recipientInfo: any;
@@ -28,7 +30,8 @@ export class QRTransferComponent {
     private authState: AuthStateService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private dialog: MatDialog
   ) {
     this.currentPage = 'mobile-number-page';
     this.amountAndPinForm = formBuilder.group(
@@ -91,6 +94,20 @@ export class QRTransferComponent {
     } else if(this.currentPage === 'success-page') {
       this.router.navigateByUrl('/app/home');
     }
+  }
+
+  openSuccessDialog(successMessage: string): void {
+    const dialogRef = this.dialog.open(SuccessDialogComponent, {
+      disableClose: false,
+      autoFocus: false,
+      data: {
+        successMessage: successMessage
+      }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 
   get isGoBackDisabled() {

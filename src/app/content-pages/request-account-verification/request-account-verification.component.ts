@@ -8,6 +8,7 @@ import { environment } from 'src/app/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
 import { Location } from '@angular/common';
 import { ContentDialogComponent } from '../content-dialog/content-dialog.component';
+import { FailDialogComponent } from 'src/app/full-pages/fail-dialog/fail-dialog.component';
 
 @Component({
   selector: 'app-request-account-verification',
@@ -22,7 +23,7 @@ export class RequestAccountVerificationComponent {
   reactivationUrl = environment.API_HOST + '/authentication/verify-email';
   isCodeRequestSuccess: boolean = false;
   isAccountVerificationSuccess: boolean = false;
-  dialogRef!: MatDialogRef<ContentDialogComponent>
+  dialogRef!: MatDialogRef<ContentDialogComponent, FailDialogComponent>
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -33,7 +34,7 @@ export class RequestAccountVerificationComponent {
   ){
     this.emailForm = formBuilder.group(
       {
-        email: ['', [Validators.email, Validators.required]]  
+        email: ['', [Validators.required, Validators.pattern('^(?:(?!.*?[.]{2})[a-zA-Z0-9](?:[a-zA-Z0-9.+!%-]{1,64}|)|\"[a-zA-Z0-9.+!% -]{1,64}\")@[a-zA-Z0-9][a-zA-Z0-9.-]+(.[a-z]{2,}|.[0-9]{1,})$')]]  
       }
     )
     this.codeForm = formBuilder.group(
@@ -106,7 +107,21 @@ export class RequestAccountVerificationComponent {
     });
   }
 
-  private handleError(error: HttpErrorResponse) {
+  openFailDialog(errorMessage: string): void {
+    const dialogRef = this.dialog.open(FailDialogComponent, {
+      disableClose: false,
+      autoFocus: false,
+      data: {
+        errorMessage: errorMessage
+      }
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    })
+  }
+
+  private handleError = (error: HttpErrorResponse) => {
     if (error.status === 0) 
     {
       console.error('An error occurred:', error.error);
@@ -114,10 +129,8 @@ export class RequestAccountVerificationComponent {
     else 
     {
       console.warn(error);
-      alert(error.error.message);
+      this.openFailDialog(error.error.message);
     }
-    // to prevent a bug where if the logout request failed 
-    // this.stateService.removeCurrentUser();
     return throwError(() => new Error(''))
   }
 }

@@ -6,6 +6,9 @@ import { AuthStateService } from 'src/app/shared/auth-state.service';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { FailDialogComponent } from '../../fail-dialog/fail-dialog.component';
+import { SuccessDialogComponent } from '../../success-dialog/success-dialog.component';
 
 @Component({
   selector: 'app-transfer-form',
@@ -17,6 +20,7 @@ export class TransferFormComponent {
   mobileNumberForm: FormGroup;
   amountAndPinForm: FormGroup;
   doesMobileExists: boolean;
+  dialogRef!: MatDialogRef<SuccessDialogComponent,FailDialogComponent>;
 
   myPhoneNumber: string;
   recipientInfo: any;
@@ -27,7 +31,8 @@ export class TransferFormComponent {
     private authState: AuthStateService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private dialog: MatDialog
   ) {
     this.currentPage = 'mobile-number-page';
     this.mobileNumberForm = formBuilder.group(
@@ -51,7 +56,7 @@ export class TransferFormComponent {
   verifyMobileNumber(): void {
     const mobile = this.mobileNumberForm.value.mobileNumber;
     if(mobile === this.myPhoneNumber) {
-      alert("you cannot transfer to yourself");
+      this.openFailDialog("Self transfer is not allowed");
       return;
     }
     const payload = {
@@ -82,7 +87,7 @@ export class TransferFormComponent {
       catchError(this.handleError)
     ).subscribe(response => {
       console.log(response);
-      alert(response.message);
+      this.openSuccessDialog(response.message);
       this.currentPage = 'success-page';
     })
   }
@@ -118,7 +123,35 @@ export class TransferFormComponent {
     return this.currentPage === 'code-form' && !this.doesMobileExists
   }
 
-  private handleError(error: HttpErrorResponse) {
+  openSuccessDialog(successMessage: string): void {
+    const dialogRef = this.dialog.open(SuccessDialogComponent, {
+      disableClose: false,
+      autoFocus: false,
+      data: {
+        successMessage: successMessage
+      }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  openFailDialog(errorMessage: string): void {
+    const dialogRef = this.dialog.open(FailDialogComponent, {
+      disableClose: false,
+      autoFocus: false,
+      data: {
+        errorMessage: errorMessage
+      }
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    })
+  }
+
+  private handleError = (error: HttpErrorResponse) => {
     if (error.status === 0) 
     {
       console.error('An error occurred:', error.error);
@@ -126,10 +159,8 @@ export class TransferFormComponent {
     else 
     {
       console.warn(error);
-      alert(error.error.message);
+      this.openFailDialog(error.error.message);
     }
-    // to prevent a bug where if the logout request failed 
-    // this.stateService.removeCurrentUser();
     return throwError(() => new Error(''))
   }
 }
