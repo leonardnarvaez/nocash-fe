@@ -47,11 +47,12 @@ export class AuthService {
     );
   }
 
-  register(emailAddress: string, mobileNumber: string, pin: string): Observable<User> {
+  register(emailAddress: string, mobileNumber: string, pin: string, username: string): Observable<User> {
     return this.httpClient.post<User>(`${this.API_HOST}/authentication/register`, {
       emailAddress,
       mobileNumber,
-      pin
+      pin,
+      username
     }).pipe(
       tap((user: User) => console.log(user))
     )

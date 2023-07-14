@@ -34,6 +34,7 @@ export class RegisterComponent implements OnInit{
     this.registerForm = this.formBuilder.group(
       {
         emailAddress: ["", [Validators.required, Validators.pattern('^(?:(?!.*?[.]{2})[a-zA-Z0-9](?:[a-zA-Z0-9.+!%-]{1,64}|)|\"[a-zA-Z0-9.+!% -]{1,64}\")@[a-zA-Z0-9][a-zA-Z0-9.-]+(.[a-z]{2,}|.[0-9]{1,})$')]],
+        username: ["", Validators.required],
         mobileNumber: ["", [Validators. required, Validators.pattern("^(09|\\+639)\\d{9}$")]],
         pin: ["", [Validators.required, Validators.pattern('[0-9]{4}'), Validators.minLength(4), Validators.maxLength(4)]],
       },
@@ -53,8 +54,10 @@ export class RegisterComponent implements OnInit{
     if(this.registerForm.invalid) {
       return;
     }
-    const {emailAddress, mobileNumber, pin} = this.registerForm.value;
-    this.authService.register(emailAddress, mobileNumber, pin)
+    const {emailAddress, username, mobileNumber, pin} = this.registerForm.value;
+    console.log(this.registerForm.value);
+    
+    this.authService.register(emailAddress, mobileNumber, pin, username)
     .pipe(catchError(this.handleError))
     .subscribe((user: User) => {
       this.router.navigateByUrl("/verify-account");

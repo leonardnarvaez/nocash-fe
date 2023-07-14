@@ -48,6 +48,19 @@
           </div>
               </div>
             </div>
+            
+            <div class="form-group basic">
+              <div class="input-wrapper">
+                <label>Username</label>
+                <input
+                  type="text"
+                  formControlName="username"
+                  class="form-control"
+                  placeholder="Username"
+                />
+              </div>
+            </div>
+
             <div class="form-group basic">
               <div class="input-wrapper">
                 <label>Mobile Number</label>
@@ -141,17 +154,6 @@
               </div>
             </div>
 
-            <!-- <div class="form-group basic">
-              <div class="input-wrapper">
-                <label>Retype PIN</label>
-                <input
-                  type="password"
-                  formControlName="pin"
-                  class="form-control"
-                  placeholder="Type PIN again"
-                />
-              </div>
-            </div> -->
             <div class="form-button-group transparent">
               <button class="btn btn-primary btn-block btn-lg" type="submit" [disabled]="!registerForm.valid">
                 Register
