@@ -6,6 +6,7 @@ import { environment } from 'src/app/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Location } from '@angular/common';
+import { AuthStateService } from 'src/app/shared/auth-state.service';
 
 @Component({
   selector: 'app-settings-panel',
@@ -15,14 +16,20 @@ import { Location } from '@angular/common';
 export class SettingsPanelComponent implements OnInit{
   base_url;
   dialogRef!: MatDialogRef<LogoutConfirmationDialogComponent>;
+  username: string;
+  mobile: string;
   constructor(
     private httpClient: HttpClient,
     private authService: AuthService,
     private router: Router,
     private dialog: MatDialog,
-    private location: Location
+    private location: Location,
+    private authState: AuthStateService
     ){
     this.base_url = environment.API_HOST;
+    const user = authState.getCurrentUser();
+    this.username = user.firstName;
+    this.mobile = user.mobileNumber;
   }
   ngOnInit(): void {
     this.httpClient.get(`${this.base_url}/api/employees`)
