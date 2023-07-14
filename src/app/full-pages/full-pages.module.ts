@@ -25,6 +25,7 @@ import { FailDialogComponent } from './fail-dialog/fail-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TransactionRecentComponent } from './transaction/transaction-recent/transaction-recent.component';
 import { TransactionModule } from './transaction/transaction.module';
+import { FundTransferModule } from './fund-transfer/fund-transfer.module';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { TransactionModule } from './transaction/transaction.module';
     MatButtonModule,
     MatDialogModule,
     HttpClientModule,
-    TransactionModule
+    TransactionModule,
+    FundTransferModule
   ]
 })
 export class FullPagesModule { }

@@ -124,6 +124,10 @@ const routes: Routes = [
         path: 'transaction',
         loadChildren: () => import('./transaction/transaction.module').then(m => m.TransactionModule)
       },
+      {
+        path: 'fund-transfer',
+        loadChildren: () => import('./fund-transfer/fund-transfer.module').then(m => m.FundTransferModule)
+      }
     ]
     }
 ];
