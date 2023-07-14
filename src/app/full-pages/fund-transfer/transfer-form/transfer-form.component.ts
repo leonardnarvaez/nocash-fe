@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/app/environments/environment';
 import { Location } from '@angular/common';
 import { AuthStateService } from 'src/app/shared/auth-state.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 
@@ -12,7 +12,7 @@ import { catchError, throwError } from 'rxjs';
   templateUrl: './transfer-form.component.html',
   styleUrls: ['./transfer-form.component.css']
 })
-export class TransferFormComponent implements OnInit {
+export class TransferFormComponent {
   currentPage: string;
   mobileNumberForm: FormGroup;
   amountAndPinForm: FormGroup;
@@ -32,21 +32,21 @@ export class TransferFormComponent implements OnInit {
     this.currentPage = 'mobile-number-page';
     this.mobileNumberForm = formBuilder.group(
       {
-        mobileNumber: ["", [Validators.required]]
+        mobileNumber: ["", [Validators.required, Validators.pattern("^(09|\\+639)\\d{9}$")]]
       }
     );
     this.amountAndPinForm = formBuilder.group(
       {
-        amount: ['', [Validators.required]],
-        pin: ['', [Validators.required]]
+        amount: ['', [Validators.required, this.positiveBalanceValidator, this.topUpLimitValidator]],
+        pin: ['', [Validators.required, Validators.pattern('[0-9]{4}')]]
       }
     );
     this.doesMobileExists = false;
     this.myPhoneNumber = authState.getCurrentUser().mobileNumber;
   }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+  // ngOnInit(): void {
+  //   throw new Error('Method not implemented.');
+  // }
 
   verifyMobileNumber(): void {
     const mobile = this.mobileNumberForm.value.mobileNumber;
@@ -85,6 +85,22 @@ export class TransferFormComponent implements OnInit {
       alert(response.message);
       this.currentPage = 'success-page';
     })
+  }
+
+  topUpLimitValidator(control: AbstractControl) {
+    const balance = control.value;
+    if (balance > 50000) {
+      return { overLimit: true };
+    }
+    return null;
+  }
+
+  positiveBalanceValidator(control: AbstractControl) {
+    const amount = control.value;
+    if (amount < 0) {
+      return { negative: true };
+    }
+    return null;
   }
 
   goBack(): void {
