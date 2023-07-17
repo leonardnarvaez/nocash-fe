@@ -12,6 +12,7 @@ import { PinResetComponent } from './pin-reset/pin-reset.component';
 import { BillPaymentFormComponent } from './bill-payment-form/bill-payment-form.component';
 import { CashOutFormComponent } from './cash-out-form/cash-out-form.component';
 import { SettingsPanelComponent } from './settings-panel/settings-panel.component';
+import { PageNotFoundComponent } from '../shared/page-not-found/page-not-found.component';
 const routes: Routes = [
   {
     path: "",
@@ -127,6 +128,10 @@ const routes: Routes = [
       {
         path: 'fund-transfer',
         loadChildren: () => import('./fund-transfer/fund-transfer.module').then(m => m.FundTransferModule)
+      },
+      {
+        path: '**',
+        component: PageNotFoundComponent
       }
     ]
     }

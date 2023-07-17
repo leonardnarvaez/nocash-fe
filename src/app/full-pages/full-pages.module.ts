@@ -26,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TransactionRecentComponent } from './transaction/transaction-recent/transaction-recent.component';
 import { TransactionModule } from './transaction/transaction.module';
 import { FundTransferModule } from './fund-transfer/fund-transfer.module';
+import { SharedModule } from '../shared/shared.module';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -55,6 +56,7 @@ import { FundTransferModule } from './fund-transfer/fund-transfer.module';
     MatDialogModule,
     HttpClientModule,
     TransactionModule,
+    SharedModule
     // FundTransferModule
   ],
   exports: [

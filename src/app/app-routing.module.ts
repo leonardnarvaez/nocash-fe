@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CONTENT_ROUTES } from './content-pages/content-layout.routes';
 import { AuthGuard } from './shared/auth-guard.service';
 import { FULL_ROUTES } from './full-pages/full-layout.routes';
-import { NotFoundComponent } from './not-found.component';
+import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 const routes: Routes = [
   {
     path: "app",
@@ -14,7 +14,7 @@ const routes: Routes = [
     path: '',
     children: CONTENT_ROUTES
   },
-  { path: '**', component: NotFoundComponent }
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

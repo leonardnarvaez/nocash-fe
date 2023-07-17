@@ -1,29 +1,33 @@
-<div style="padding-bottom: 50px;">
-    <div class="appHeader">
-        <div class="left">
-             <i class="headerButton pi pi-arrow-left" (click)="goBack()"></i>
-        </div>
-        <div class="pageTitle">
-            Authentication
-        </div>
-    </div>
-</div>
-<div>
-    <div class="section mt-2">
-        <app-month-selector (changeMonthEvent)="changeDate($event)"></app-month-selector>
-        <div *ngFor="let authHist of paginatedAuthenticationList">
-            <app-authentication-history-card [authenticationHistory]="authHist"></app-authentication-history-card>
-        </div>
-    </div>
-    
-    <div class="right" *ngIf="authenticationHistoryList.length > 0">
-        <mat-paginator [length]="recordLength" [pageSize]="pageSize" [pageSizeOptions]="[10, 50, 100]" aria-label="Select page" (page)="page($event)">
-        </mat-paginator>
-    </div>
-    <div *ngIf="authenticationHistoryList.length <= 0">
-        <b>No records found</b>
-    </div>  
+<div class="appHeader">
+  <div class="left">
+    <i class="headerButton pi pi-arrow-left" (click)="goBack()"></i>
+  </div>
+  <div class="pageTitle">Authentication History</div>
 </div>
 
+<div id="appCapsule">
+  <div class="section mt-2">
+    <app-month-selector
+      (changeMonthEvent)="changeDate($event)"
+    ></app-month-selector>
+    <div *ngFor="let authHist of paginatedAuthenticationList">
+      <app-authentication-history-card
+        [authenticationHistory]="authHist"
+      ></app-authentication-history-card>
+    </div>
+  </div>
 
-
+  <div *ngIf="authenticationHistoryList.length > 0">
+    <mat-paginator
+      [length]="recordLength"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[10, 50, 100]"
+      aria-label="Select page"
+      (page)="page($event)"
+    >
+    </mat-paginator>
+  </div>
+  <div *ngIf="authenticationHistoryList.length <= 0">
+    <b>No records found</b>
+  </div>
+</div>
