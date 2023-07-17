@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { catchError, take, throwError } from 'rxjs';
+import { catchError, map, take, throwError } from 'rxjs';
 import { Transaction } from 'src/app/models/transaction';
 import { TransactionService } from 'src/app/services/transaction.service';
 import { Location } from '@angular/common';
@@ -32,7 +32,7 @@ export class TransactionListComponent implements OnInit {
   fetchRecords(startDate: Date, endDate: Date): void {
     this.transactionService.findAllByInterval(startDate, endDate)
       .pipe(
-        catchError(this.handleError)
+        catchError(this.handleError),
       )
       .subscribe((fetchedTransactionList: Transaction[]) => {
         console.log(fetchedTransactionList);

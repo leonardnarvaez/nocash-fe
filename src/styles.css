@@ -32,7 +32,7 @@ a:hover,a:active,a:focus {
     width: 0
 }
 
-.pi-arrow-left {
+.pi-arrow-left, .pi-arrow-right {
     cursor: pointer;
 }
 
