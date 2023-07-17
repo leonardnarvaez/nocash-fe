@@ -6,7 +6,7 @@ import { TransactionCardComponent } from './transaction-card/transaction-card.co
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransactionRecentComponent } from './transaction-recent/transaction-recent.component';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
-
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,8 @@ import { TransactionDetailComponent } from './transaction-detail/transaction-det
   ],
   imports: [
     CommonModule,
-    TransactionRoutingModule
+    TransactionRoutingModule,
+    MatPaginatorModule
   ],
   exports: [
     TransactionRecentComponent

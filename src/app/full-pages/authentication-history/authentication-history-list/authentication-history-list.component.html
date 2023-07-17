@@ -7,13 +7,17 @@
             Authentication
         </div>
     </div>
- 
- </div>
-    <div class="section mt-2">
-        <div *ngFor="let authHist of authenticationHistoryList">
-            <!-- <li> -->
-                <app-authentication-history-card [authenticationHistory]="authHist"></app-authentication-history-card>
-            <!-- </li> -->
-        </div>
+</div>
+<div class="section mt-2">
+    <div *ngFor="let authHist of paginatedAuthenticationList">
+        <!-- <li> -->
+            <app-authentication-history-card [authenticationHistory]="authHist"></app-authentication-history-card>
+        <!-- </li> -->
     </div>
+</div>
+
+<div class="right">
+    <mat-paginator [length]="recordLength" [pageSize]="pageSize" [pageSizeOptions]="[10, 50, 100]" aria-label="Select page" (page)="page($event)">
+    </mat-paginator>
+</div>
 

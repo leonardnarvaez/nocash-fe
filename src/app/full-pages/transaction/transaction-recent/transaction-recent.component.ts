@@ -26,7 +26,7 @@ export class TransactionRecentComponent implements OnInit {
         console.log(fetchedTransactionList);
         this.transactionList = fetchedTransactionList;
         if(this.transactionList.length > 5) {
-          this.recentTransactions = this.transactionList.slice(0, 5);
+          this.recentTransactions = this.transactionList.slice(0, 6);
         } else {
           this.recentTransactions = this.transactionList;
         }

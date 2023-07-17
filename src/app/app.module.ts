@@ -15,6 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ErrorHandlerInterceptorService } from './services/error-handler-interceptor.service';
 import { CreditCardDirectivesModule } from 'angular-cc-library';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { CreditCardDirectivesModule } from 'angular-cc-library';
     FormsModule,
     MatDialogModule,
     MatButtonModule,
-    CreditCardDirectivesModule
+    CreditCardDirectivesModule,
+    MatPaginatorModule
   ],
   providers: [
     AuthService,

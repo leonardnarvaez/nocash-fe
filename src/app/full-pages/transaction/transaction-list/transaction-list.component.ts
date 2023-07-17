@@ -5,6 +5,7 @@ import { Transaction } from 'src/app/models/transaction';
 import { TransactionService } from 'src/app/services/transaction.service';
 import { Location } from '@angular/common';
 import { getFirstAndLastDay, convertDate } from 'src/app/util/date-util';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-transaction-list',
@@ -13,10 +14,16 @@ import { getFirstAndLastDay, convertDate } from 'src/app/util/date-util';
 })
 export class TransactionListComponent implements OnInit {
   transactionList: Transaction[] = [];
+  paginatedTransactionList: Transaction[] = [];
+  pageSize: number;
+  recordLength: number;
   constructor(
     private transactionService: TransactionService,
     private location: Location
-  ) {}
+  ) {
+    this.pageSize = 10;
+    this.recordLength = 0;
+  }
   ngOnInit(): void {
     const [startDay, lastDay] = getFirstAndLastDay(new Date());
     this.transactionService.findAllByInterval(startDay, lastDay)
@@ -26,6 +33,8 @@ export class TransactionListComponent implements OnInit {
       .subscribe((fetchedTransactionList: Transaction[]) => {
         console.log(fetchedTransactionList);
         this.transactionList = fetchedTransactionList;
+        this.iterator(1);
+        this.recordLength = fetchedTransactionList.length;
       })
   }
 
@@ -41,10 +50,19 @@ export class TransactionListComponent implements OnInit {
     }
     return throwError(() => new Error(''))
   }
-
+  page(p: PageEvent) {
+    console.log(p);
+    console.log(this.pageSize);
+    this.pageSize = p.pageSize;
+    this.iterator(p.pageIndex); 
+  }
   goBack(): void {
     console.log("go back");
     
     this.location.back();
+  }
+  iterator(pageIndex: number): void {
+    const startIndex = pageIndex * this.pageSize;
+    this.paginatedTransactionList = this.paginatedTransactionList.slice(startIndex, startIndex + this.pageSize);
   }
 }

@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { getFirstAndLastDay } from 'src/app/util/date-util';
 import { catchError, throwError } from 'rxjs';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-authentication-history-list',
@@ -13,11 +14,17 @@ import { catchError, throwError } from 'rxjs';
 })
 export class AuthenticationHistoryListComponent implements OnInit {
   authenticationHistoryList: AuthenticationHistory[];
+  paginatedAuthenticationList: AuthenticationHistory[];
+  pageSize: number;
+  recordLength: number;
   constructor(
     private authenticationHistoryService: AuthenticationHistoryService,
-    private location: Location
+    private location: Location,
   ) {
     this.authenticationHistoryList = [];
+    this.paginatedAuthenticationList = [];
+    this.pageSize = 10;
+    this.recordLength = 0;
   }
   ngOnInit(): void {
     const [startDay, lastDay] = getFirstAndLastDay(new Date());
@@ -28,6 +35,8 @@ export class AuthenticationHistoryListComponent implements OnInit {
       .subscribe((authenticationHistoryList: AuthenticationHistory[]) => {
         console.log(authenticationHistoryList);
         this.authenticationHistoryList = authenticationHistoryList;
+        this.recordLength = authenticationHistoryList.length;
+        this.iterator(1);
       })
   }
   private handleError(error: HttpErrorResponse) {
@@ -42,8 +51,19 @@ export class AuthenticationHistoryListComponent implements OnInit {
     }
     return throwError(() => new Error(''))
   }
+  page(p: PageEvent) {
+    console.log(p);
+    console.log(this.pageSize);
+    this.pageSize = p.pageSize;
+    this.iterator(p.pageIndex); 
+  }
   goBack(): void {
     console.log("go back");
     this.location.back();
+  }
+
+  iterator(pageIndex: number): void {
+    const startIndex = pageIndex * this.pageSize;
+    this.paginatedAuthenticationList = this.authenticationHistoryList.slice(startIndex, startIndex + this.pageSize);
   }
 }
