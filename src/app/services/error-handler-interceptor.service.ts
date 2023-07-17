@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FailDialogComponent } from '../full-pages/fail-dialog/fail-dialog.component';
+import { AuthStateService } from '../shared/auth-state.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class ErrorHandlerInterceptorService implements HttpInterceptor {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private stateService: AuthStateService
   ) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
@@ -29,8 +31,10 @@ export class ErrorHandlerInterceptorService implements HttpInterceptor {
         },
         error: error => {
           if(error.status === 403) {
+            this.stateService.removeCurrentUser();
             this.authService.logout().subscribe((m:any) => {
               console.error(m);
+              
               this.openFailDialog(m.error)
               this.router.navigateByUrl('/login')
             })

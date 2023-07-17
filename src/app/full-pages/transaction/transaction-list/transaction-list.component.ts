@@ -33,7 +33,7 @@ export class TransactionListComponent implements OnInit {
       .subscribe((fetchedTransactionList: Transaction[]) => {
         console.log(fetchedTransactionList);
         this.transactionList = fetchedTransactionList;
-        this.iterator(1);
+        this.iterator(0);
         this.recordLength = fetchedTransactionList.length;
       })
   }
@@ -63,6 +63,6 @@ export class TransactionListComponent implements OnInit {
   }
   iterator(pageIndex: number): void {
     const startIndex = pageIndex * this.pageSize;
-    this.paginatedTransactionList = this.paginatedTransactionList.slice(startIndex, startIndex + this.pageSize);
+    this.paginatedTransactionList = this.transactionList.slice(startIndex, startIndex + this.pageSize);
   }
 }

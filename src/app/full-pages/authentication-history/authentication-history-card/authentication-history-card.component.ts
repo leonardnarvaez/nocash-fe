@@ -14,13 +14,18 @@ export class AuthenticationHistoryCardComponent implements OnInit {
   }
   ngOnInit(): void {
     const userAgent = this.authenticationHistory.userAgent;
-    const start = userAgent.indexOf('(');
-    const end = userAgent.indexOf(')') + 1;
+
+    try{
+      const start = userAgent.indexOf('(');
+      const end = userAgent.indexOf(')') + 1;
+      this.userAgentTrimmed = userAgent.substring(start, end);
+    } catch(e) {
+      this.userAgentTrimmed = userAgent;
+    }
+
     // console.log(start);
     // console.log(end);
     
-    
-    this.userAgentTrimmed = userAgent.substring(start, end);
     console.log(this.userAgentTrimmed);
     
   }

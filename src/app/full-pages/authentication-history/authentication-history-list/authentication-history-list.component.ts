@@ -36,7 +36,7 @@ export class AuthenticationHistoryListComponent implements OnInit {
         console.log(authenticationHistoryList);
         this.authenticationHistoryList = authenticationHistoryList;
         this.recordLength = authenticationHistoryList.length;
-        this.iterator(1);
+        this.iterator(0);
       })
   }
   private handleError(error: HttpErrorResponse) {

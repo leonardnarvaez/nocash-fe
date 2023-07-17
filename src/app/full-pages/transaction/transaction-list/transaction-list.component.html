@@ -12,7 +12,7 @@
 
   <div class="section mt-2">
       <div class="transactions">
-          <div *ngFor="let transaction of transactionList">
+          <div *ngFor="let transaction of paginatedTransactionList">
               <!-- <li> -->
                   <app-transaction-card [transaction]="transaction"></app-transaction-card>
               <!-- </li> -->

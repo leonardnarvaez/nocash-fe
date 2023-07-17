@@ -12,6 +12,7 @@ import {
 import { AuthStateService } from '../shared/auth-state.service';
 import { User } from '../models/user';
 import { Observable, tap, pipe } from "rxjs";
+import { JwtService } from "../shared/jwt.service";
 
 @Injectable()
 export class AuthService {
@@ -19,7 +20,8 @@ export class AuthService {
   constructor(
     private stateService: AuthStateService,
     private router: Router,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private jwtService: JwtService,
   ) {}
 
   isAuthenticated() {
@@ -39,10 +41,11 @@ export class AuthService {
 
   logout() {
     console.info("logout")
-    this.stateService.removeCurrentUser();
+    
     return this.httpClient.get(`${this.API_HOST}/authentication/logout`).pipe(
       tap(message => {
         console.log(message);
+        this.stateService.removeCurrentUser();
       })
     );
   }
