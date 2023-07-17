@@ -27,7 +27,6 @@ export class AuthenticationHistoryCardComponent implements OnInit {
     // console.log(end);
     
     console.log(this.userAgentTrimmed);
-    
   }
 
 }

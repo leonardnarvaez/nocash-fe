@@ -26,7 +26,11 @@ export class TransactionListComponent implements OnInit {
   }
   ngOnInit(): void {
     const [startDay, lastDay] = getFirstAndLastDay(new Date());
-    this.transactionService.findAllByInterval(startDay, lastDay)
+    this.fetchRecords(startDay, lastDay);
+  }
+
+  fetchRecords(startDate: Date, endDate: Date): void {
+    this.transactionService.findAllByInterval(startDate, endDate)
       .pipe(
         catchError(this.handleError)
       )
@@ -64,5 +68,12 @@ export class TransactionListComponent implements OnInit {
   iterator(pageIndex: number): void {
     const startIndex = pageIndex * this.pageSize;
     this.paginatedTransactionList = this.transactionList.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  changeDate(date: Date): void {
+    console.log('from authentication');
+    const [startDay, lastDay] = getFirstAndLastDay(date);
+    this.fetchRecords(startDay, lastDay);
+    console.log(date);
   }
 }

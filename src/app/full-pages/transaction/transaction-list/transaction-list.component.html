@@ -12,15 +12,20 @@
 
   <div class="section mt-2">
       <div class="transactions">
+        <app-month-selector (changeMonthEvent)="changeDate($event)"></app-month-selector>
           <div *ngFor="let transaction of paginatedTransactionList">
-              <!-- <li> -->
-                  <app-transaction-card [transaction]="transaction"></app-transaction-card>
-              <!-- </li> -->
+            <app-transaction-card [transaction]="transaction"></app-transaction-card>
           </div>
       </div>
   </div>
-  <mat-paginator [length]="recordLength" [pageSize]="pageSize" [pageSizeOptions]="[10, 50, 100]" aria-label="Select page" (page)="page($event)">
-  </mat-paginator>
+  <div *ngIf="transactionList.length > 0">
+    <mat-paginator [length]="recordLength" [pageSize]="pageSize" [pageSizeOptions]="[10, 50, 100]" aria-label="Select page" (page)="page($event)">
+    </mat-paginator>
+  </div>
+  <div *ngIf="transactionList.length <= 0">
+    <b>No records found</b>
+</div>  
+
 </div>
 
 <!-- App Bottom Menu -->

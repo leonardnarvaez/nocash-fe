@@ -28,7 +28,10 @@ export class AuthenticationHistoryListComponent implements OnInit {
   }
   ngOnInit(): void {
     const [startDay, lastDay] = getFirstAndLastDay(new Date());
-    this.authenticationHistoryService.findAllByInterval(startDay, lastDay)
+    this.fetchRecords(startDay, lastDay);
+  }
+  fetchRecords(startDate: Date, lastDate: Date): void {
+    this.authenticationHistoryService.findAllByInterval(startDate, lastDate)
       .pipe(
         catchError(this.handleError)
       )
@@ -65,5 +68,12 @@ export class AuthenticationHistoryListComponent implements OnInit {
   iterator(pageIndex: number): void {
     const startIndex = pageIndex * this.pageSize;
     this.paginatedAuthenticationList = this.authenticationHistoryList.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  changeDate(date: Date): void {
+    console.log('from authentication');
+    const [startDay, lastDay] = getFirstAndLastDay(date);
+    this.fetchRecords(startDay, lastDay);
+    console.log(date);
   }
 }

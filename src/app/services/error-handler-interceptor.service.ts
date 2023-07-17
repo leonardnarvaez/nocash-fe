@@ -32,12 +32,13 @@ export class ErrorHandlerInterceptorService implements HttpInterceptor {
         error: error => {
           if(error.status === 403) {
             this.stateService.removeCurrentUser();
-            this.authService.logout().subscribe((m:any) => {
-              console.error(m);
+            // this.authService.logout().subscribe((m:any) => {
+            //   console.error(m);
               
-              this.openFailDialog(m.error)
-              this.router.navigateByUrl('/login')
-            })
+              
+            //   this.router.navigateByUrl('/login')
+            // })
+            this.openFailDialog("Unauthorized Access");
           } else if(error.status === 404) {
             alert('Resource not found');
           }
