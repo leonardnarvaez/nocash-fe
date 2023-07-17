@@ -27,7 +27,8 @@ export class TransactionService extends CrudService<Transaction, string>{
       }
     }).pipe(
       map((transactions: Transaction[]) => {
-        return transactions.reverse();
+        // return transactions.reverse();4
+        return transactions.sort((item1, item2) => new Date(item2.creationTime).getTime() - new Date(item1.creationTime).getTime())
       }),
       tap((transactions: Transaction[])=>{
         this.transactions = transactions;

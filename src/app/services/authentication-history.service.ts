@@ -26,7 +26,7 @@ export class AuthenticationHistoryService extends CrudService<AuthenticationHist
       }
     }).pipe(
       map((authenticationHistoryList: AuthenticationHistory[]) => {
-        return authenticationHistoryList.reverse();
+        return authenticationHistoryList.sort((item1, item2) => new Date(item2.creationTime).getTime() - new Date(item1.creationTime).getTime());
       }),
       tap((authenticationHistoryList: AuthenticationHistory[])=>{
         this.authenticationHistoryList = authenticationHistoryList;

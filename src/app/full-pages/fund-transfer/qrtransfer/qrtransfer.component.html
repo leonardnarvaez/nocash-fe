@@ -43,8 +43,12 @@
                     type="text"
                     formControlName="amount"
                     class="form-control"
-                    placeholder="amount"
+                    placeholder="Amount"
+                    required
                   />
+                  <div class="text-danger" *ngIf="amountAndPinForm.controls['amount'].errors?.['negative']">
+                    Amount cannot be negative.
+                  </div>
                 </div>
               </div>
 
@@ -60,14 +64,46 @@
                         minlength="4"
                         maxlength="4"
                     />
+                    <div
+                  *ngIf="
+                  amountAndPinForm.controls['pin'].invalid &&
+                    (amountAndPinForm.controls['pin'].dirty ||
+                    amountAndPinForm.controls['pin'].touched)
+                  "
+                >
+                  <div
+                    class="text-danger"
+                    *ngIf="amountAndPinForm.controls['pin'].errors?.['required']"
+                  >
+                    PIN is required.
+                  </div>
+                  <div
+                    class="text-danger"
+                    *ngIf="amountAndPinForm.controls['pin'].errors?.['minlength']"
+                  >
+                    PIN must be 4 characters long.
+                  </div>
+                  <div
+                    class="text-danger"
+                    *ngIf="amountAndPinForm.controls['pin'].errors?.['maxlength']"
+                  >
+                    PIN must be 4 characters long.
+                  </div>
+                  <div
+                    class="text-danger"
+                    *ngIf="amountAndPinForm.controls['pin'].errors?.['pattern']"
+                  >
+                  PIN must be a 4 digit numeric combination.
+                  </div>
+                </div>
                 </div>
             </div>
 
 
   
               <div class="form-button-group transparent">
-                <button class="btn btn-primary btn-block btn-lg" type="submit">
-                  Activate Account
+                <button class="btn btn-primary btn-block btn-lg" type="submit" [disabled]="!amountAndPinForm.valid">
+                  Send Money
                 </button>
               </div>
 

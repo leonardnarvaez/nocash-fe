@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/app/environments/environment';
 import { Location } from '@angular/common';
 import { AuthStateService } from 'src/app/shared/auth-state.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SuccessDialogComponent } from '../../success-dialog/success-dialog.component';
+import { FailDialogComponent } from '../../fail-dialog/fail-dialog.component';
 
 @Component({
   selector: 'app-qrtransfer',
@@ -19,7 +20,7 @@ export class QRTransferComponent {
   // mobileNumberForm: FormGroup;
   amountAndPinForm: FormGroup;
   doesMobileExists: boolean;
-  dialogRef!: MatDialogRef<SuccessDialogComponent>
+  dialogRef!: MatDialogRef<SuccessDialogComponent, FailDialogComponent>
   myPhoneNumber: string;
   scannedMobileNumber: string;
   recipientInfo: any;
@@ -36,8 +37,8 @@ export class QRTransferComponent {
     this.currentPage = 'mobile-number-page';
     this.amountAndPinForm = formBuilder.group(
       {
-        amount: ['', [Validators.required]],
-        pin: ['', [Validators.required]]
+        amount: ['', [Validators.required, this.positiveBalanceValidator]],
+        pin: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('[0-9]{4}')]]
       }
     );
     this.doesMobileExists = false;
@@ -80,8 +81,8 @@ export class QRTransferComponent {
     .pipe(
       catchError(this.handleError)
     ).subscribe(response => {
-      console.log(response);
-      alert(response.message);
+      this.openSuccessDialog(response.message)
+      console.info(response);
       this.currentPage = 'success-page';
     })
   }
@@ -110,12 +111,34 @@ export class QRTransferComponent {
     });
   }
 
+  openFailDialog(errorMessage: string): void {
+    const dialogRef = this.dialog.open(FailDialogComponent, {
+      disableClose: false,
+      autoFocus: false,
+      data: {
+        errorMessage: errorMessage
+      }
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    })
+  }
+
+  positiveBalanceValidator(control: AbstractControl) {
+    const balance = control.value;
+    if (balance < 0) {
+      return { negative: true };
+    }
+    return null;
+  }
+
   get isGoBackDisabled() {
     // prevent user from going back the email page
     return this.currentPage === 'code-form' && !this.doesMobileExists
   }
 
-  private handleError(error: HttpErrorResponse) {
+  private handleError = (error: HttpErrorResponse) => {
     if (error.status === 0) 
     {
       console.error('An error occurred:', error.error);
@@ -123,10 +146,8 @@ export class QRTransferComponent {
     else 
     {
       console.warn(error);
-      alert(error.error.message);
+      this.openFailDialog(error.error.message);
     }
-    // to prevent a bug where if the logout request failed 
-    // this.stateService.removeCurrentUser();
     return throwError(() => new Error(''))
   }
 }
